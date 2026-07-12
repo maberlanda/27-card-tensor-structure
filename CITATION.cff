@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+
+authors:
+  - family-names: "Berlanda"
+    given-names: "Maurizio"
+
+title: "27-card tensor structure"
+
+repository-code: "https://github.com/maberlanda/27-card-tensor-structure"
+url: "https://github.com/maberlanda/27-card-tensor-structure"
+
+preferred-citation:
+  type: unpublished
+  authors:
+    - family-names: "Berlanda"
+      given-names: "Maurizio"
+  title: "Una struttura tensoriale per il gioco delle ventisette carte: Prodotti di Kronecker, azioni di gruppo e fibre digitali"
+  year: 2026
+  url: "https://github.com/maberlanda/27-card-tensor-structure"
