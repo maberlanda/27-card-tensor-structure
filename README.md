@@ -36,3 +36,14 @@ for permutation analysis, exhaustive searches and associated data.
 ## Author
 
 Maurizio Berlanda
+
+## Copyright and licensing
+
+Copyright © 2026 Maurizio Berlanda.
+
+The paper and its LaTeX source are currently provided under standard
+copyright protection. No license for redistribution or derivative works
+is granted unless explicitly stated.
+
+Future software and data included in this repository may be released under
+separate licenses.
