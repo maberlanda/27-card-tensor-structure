@@ -5,7 +5,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathtools}
-\usepackage{enumitem}
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{geometry}
@@ -21,1111 +20,909 @@
 \newtheorem{definition}[theorem]{Definizione}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Osservazione}
+\newtheorem{example}[theorem]{Esempio}
 
-\newcommand{\Sb}{S_b}
-\newcommand{\Sm}{S_b^m}
-\newcommand{\SN}{S_{b^m}}
-\newcommand{\T}{\mathcal T}
+\newcommand{\Db}{D_b}
 \newcommand{\MSC}{\mathcal M}
 \newcommand{\val}{\operatorname{val}}
 \newcommand{\ord}{\operatorname{ord}}
 \newcommand{\fix}{\operatorname{fix}}
 \newcommand{\mcm}{\operatorname{mcm}}
 
-\title{Una struttura tensoriale per il gioco delle ventisette carte\\
-\large Prodotti di Kronecker, azioni di gruppo e fibre digitali}
-\author{Maurizio Berlanda}
+\title{Permutazioni digitalmente separabili nei giochi di carte su
+	\texorpdfstring{\(b^m\)}{b alla m} posizioni\\
+	\large Prodotti di Kronecker e ricostruzione da fibre digitali}
+\author{Maurizio Berlanda\\
+	\small\url{https://github.com/maberlanda/27-card-tensor-structure}}
 \date{}
 
 \begin{document}
-
-\maketitle
-
-\begin{abstract}
-Si considera il gioco delle ventisette carte come il caso particolare
-\(b=m=3\) di una costruzione definita su \(N=b^m\) posizioni. La scrittura
-posizionale in base \(b\) identifica le posizioni del mazzo con gli elementi
-di \(\{0,\dots,b-1\}^m\) e consente di descrivere una procedura completa
-mediante una \(m\)-upla di permutazioni
-\[
-\T=(\rho_{m-1},\dots,\rho_0)\in S_b^m.
-\]
-La corrispondente trasformazione globale è rappresentata dalla matrice di
-permutazione
-\[
-K_{\T}=P_{m-1}\otimes\cdots\otimes P_0,
-\]
-e induce un omomorfismo iniettivo \(S_b^m\hookrightarrow S_{b^m}\).
-Si caratterizza l'immagine come insieme delle permutazioni separabili rispetto
-alle cifre dell'indirizzo e si introducono somme su fibre digitali che
-permettono di ricostruire le singole componenti \(\rho_i\) del tabellone.
-In appendice, il confronto con il caso rettangolare \(N=ij\) mette in evidenza
-il ruolo delle matrici di commutazione e la distinzione fra dinamica fisica del
-mazzo e dinamica informativa della carta scelta.
-\end{abstract}
-
-\section{Introduzione}
-
-Il gioco delle ventisette carte è un esempio classico di matematica ricreativa
-fondato sulla scrittura posizionale. Il numero delle carte,
-\[
-27=3^3,
-\]
-permette di distribuire il mazzo in tre mazzetti e di ripetere la procedura per
-tre passaggi. La descrizione in base tre rende trasparente il meccanismo: le
-informazioni raccolte nei diversi stadi determinano progressivamente le cifre
-ternarie della posizione finale. Questa interpretazione, strettamente legata
-agli algoritmi di ordinamento per cifre, è ben nota nella letteratura
-espositiva sul trucco di Gergonne \cite{bolker}.
-
-L'obiettivo del presente testo è isolare la struttura algebrica sottostante a
-questa lettura. Il caso \(27=3^3\) viene inserito nella famiglia
-\[
-N=b^m,
-\]
-dove \(b\) è il numero dei mazzetti e \(m\) il numero dei passaggi. Una
-procedura completa viene codificata da un elemento
-\[
-\T=(\rho_{m-1},\dots,\rho_0)\in S_b^m,
-\]
-che agisce separatamente sulle cifre dell'indirizzo posizionale e induce una
-permutazione globale delle \(b^m\) posizioni.
-
-Il punto di vista adottato è volutamente strutturale. Si distinguono il singolo
-stadio fisico, che comporta una permutazione ciclica dei fattori tensoriali, e
-la trasformazione ottenuta al termine di un ciclo completo di \(m\) stadi. La
-chiusura della rotazione dei fattori conduce a una rappresentazione mediante
-prodotti di Kronecker e a una naturale immersione del gruppo diretto
-\(S_b^m\) nel gruppo simmetrico \(S_{b^m}\).
-
-L'esposizione si concentra su tre aspetti:
-\begin{enumerate}[label=\arabic*.]
-\item la descrizione del tabellone come elemento di \(S_b^m\) e la sua
-      relazione con la dinamica fisica dei singoli stadi;
-\item la rappresentazione della trasformazione globale mediante prodotti di
-      Kronecker e la caratterizzazione delle permutazioni digitalmente
-      separabili;
-\item la ricostruzione delle componenti del tabellone mediante somme definite
-      sulle fibre digitali.
-\end{enumerate}
-
-Il linguaggio delle matrici di permutazione e dei prodotti di Kronecker è
-standard; per le matrici di commutazione e le identità connesse al prodotto di
-Kronecker si rinvia, in particolare, a Henderson e Searle \cite{henderson-searle}.
-Il confronto con la teoria dei perfect shuffles fornisce inoltre un contesto
-più ampio per lo studio algebrico delle permutazioni di mazzi di carte
-\cite{diaconis-graham-kantor}.
-
-\section{Il modello posizionale su \texorpdfstring{\(b^m\)}{b alla m} posizioni}
-
-Sia
-\[
-N=b^m.
-\]
-Le posizioni del mazzo sono numerate da \(0\) a \(b^m-1\). Ogni posizione
-ammette una rappresentazione unica in base \(b\):
-\[
-x=(a_{m-1}a_{m-2}\cdots a_1a_0)_b,
-\]
-ossia
-\[
-x=a_{m-1}b^{m-1}+a_{m-2}b^{m-2}+\cdots+a_1b+a_0,
-\]
-con
-\[
-a_i\in\{0,1,\dots,b-1\}.
-\]
-
-Indicheremo con
-\[
-\alpha=(a_{m-1},\dots,a_0)
-\]
-l'indirizzo digitale della posizione \(x\), e porremo
-\[
-\val(\alpha)
-=
-a_{m-1}b^{m-1}+\cdots+a_1b+a_0.
-\]
-La funzione \(\val\) realizza una biiezione fra
-\(\{0,\dots,b-1\}^m\) e \(\{0,\dots,b^m-1\}\).
-
-Durante un singolo passaggio, la posizione
-\[
-x=bq+r,
-\qquad
-r=x\bmod b,
-\qquad
-q=\left\lfloor\frac{x}{b}\right\rfloor
-\]
-viene distribuita nel mazzetto individuato dal resto \(r\). Se quel mazzetto
-viene raccolto nella posizione di blocco \(s\), la nuova posizione è
-\[
-x'=s\,b^{m-1}+\left\lfloor\frac{x}{b}\right\rfloor.
-\]
-
-\begin{proposition}
-Siano \(s_1,\dots,s_k\in\{0,\dots,b-1\}\) le posizioni di blocco assegnate,
-nei primi \(k\) passaggi, ai mazzetti contenenti la carta considerata. Allora
-\[
-x_k
-=
-s_kb^{m-1}+s_{k-1}b^{m-2}+\cdots+s_1b^{m-k}
-+
-\left\lfloor\frac{x_0}{b^k}\right\rfloor.
-\]
-In particolare, dopo \(m\) passaggi,
-\[
-x_m=s_mb^{m-1}+s_{m-1}b^{m-2}+\cdots+s_1.
-\]
-\end{proposition}
-
-\begin{proof}
-La formula per \(k=1\) coincide con la regola del singolo passaggio. Se vale
-per un certo \(k<m\), allora
-\[
-x_{k+1}
-=
-s_{k+1}b^{m-1}+\left\lfloor\frac{x_k}{b}\right\rfloor.
-\]
-Applicando l'ipotesi induttiva e osservando che i termini
-\(s_kb^{m-1},\dots,s_1b^{m-k}\) sono tutti multipli di \(b\), si ottiene
-\[
-\left\lfloor\frac{x_k}{b}\right\rfloor
-=
-s_kb^{m-2}+\cdots+s_1b^{m-k-1}
-+
-\left\lfloor\frac{x_0}{b^{k+1}}\right\rfloor.
-\]
-La tesi segue per induzione. Per \(k=m\), l'ultimo termine è nullo perché
-\(0\le x_0<b^m\).
-\end{proof}
-
-Nel caso classico \(b=m=3\), le tre posizioni di blocco determinate durante la
-procedura costituiscono quindi le tre cifre ternarie della posizione finale.
-
-\section{La dinamica di un singolo stadio}
-
-Per distinguere il gesto fisico dalla trasformazione globale, poniamo
-\[
-E_b=\mathbb R^b
-\]
-e indichiamo con
-\[
-e_0,\dots,e_{b-1}
-\]
-la sua base canonica. All'indirizzo
-\[
-\alpha=(a_{m-1},\dots,a_0)
-\]
-associamo il tensore elementare
-\[
-e_\alpha
-=
-e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}
-\in E_b^{\otimes m}.
-\]
-
-La distribuzione ciclica delle carte induce una rotazione dei fattori. Sia
-\[
-\MSC_m:E_b^{\otimes m}\longrightarrow E_b^{\otimes m}
-\]
-l'operatore definito da
-\[
-\MSC_m
-\left(
-e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}
-\right)
-=
-e_{a_0}\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_1}.
-\]
-Poiché \(\MSC_m\) realizza una rotazione ciclica di \(m\) fattori,
-\[
-\MSC_m^m=I.
-\]
-
-Sia \(\rho_h\in S_b\) la permutazione che, allo stadio \(h+1\), assegna a
-ciascun mazzetto la nuova posizione di blocco, e sia \(P_h\) la matrice di
-permutazione definita dalla convenzione
-\[
-P_he_r=e_{\rho_h(r)}.
-\]
-L'operatore del singolo stadio è
-\[
-T_h
-=
-(P_h\otimes I_b^{\otimes(m-1)})\MSC_m,
-\qquad
-h=0,\dots,m-1.
-\]
-
-Il singolo stadio non agisce separatamente sulle cifre originarie: prima ruota
-i fattori e poi applica \(P_h\) al fattore portato in prima posizione. La
-separabilità compare soltanto dopo un ciclo completo.
-
-\begin{proposition}
-Con le convenzioni precedenti,
-\[
-T_{m-1}\cdots T_1T_0
-=
-P_{m-1}\otimes P_{m-2}\otimes\cdots\otimes P_0.
-\]
-\end{proposition}
-
-\begin{proof}
-Applichiamo successivamente gli operatori a un tensore di base
-\[
-e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}.
-\]
-Dopo il primo stadio si ottiene
-\[
-e_{\rho_0(a_0)}\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_1}.
-\]
-Dopo il secondo,
-\[
-e_{\rho_1(a_1)}\otimes e_{\rho_0(a_0)}
-\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_2}.
-\]
-Proseguendo, dopo \(m\) stadi si arriva a
-\[
-e_{\rho_{m-1}(a_{m-1})}\otimes\cdots\otimes e_{\rho_0(a_0)},
-\]
-che è precisamente l'azione di
-\[
-P_{m-1}\otimes\cdots\otimes P_0.
-\]
-Poiché i tensori elementari formano una base di \(E_b^{\otimes m}\), i due
-operatori coincidono.
-\end{proof}
-
-La relazione \(\MSC_m^m=I\) non implica che gli operatori \(\MSC_m\) possano
-essere cancellati ingenuamente nella composizione: tra due rotazioni
-successive compaiono infatti le trasformazioni locali \(P_h\). La proposizione
-mostra, più precisamente, che la rotazione ciclica porta successivamente ogni
-cifra nel fattore sul quale agisce la permutazione dello stadio corrispondente;
-al termine del ciclo, le cifre ritornano ai livelli originari e le azioni
-locali risultano separate.
-
-\section{Il tabellone e l'azione di \texorpdfstring{\(S_b^m\)}{S b alla m}}
-
-\begin{definition}
-Un \emph{tabellone} è una \(m\)-upla di permutazioni di \(S_b\):
-\[
-\T=(\rho_{m-1},\dots,\rho_0)\in S_b^m.
-\]
-La componente \(\rho_h\) descrive l'ordine di raccolta impiegato allo stadio
-\(h+1\).
-\end{definition}
-
-Il tabellone agisce sugli indirizzi digitali secondo la regola
-\[
-\T\cdot(a_{m-1},\dots,a_0)
-=
-(\rho_{m-1}(a_{m-1}),\dots,\rho_0(a_0)).
-\]
-
-\begin{proposition}
-Il gruppo diretto \(S_b^m\) agisce su \(\{0,\dots,b-1\}^m\) mediante l'azione
-componente per componente definita sopra.
-\end{proposition}
-
-\begin{proof}
-Siano
-\[
-\T=(\rho_{m-1},\dots,\rho_0),
-\qquad
-\T'=(\rho'_{m-1},\dots,\rho'_0).
-\]
-Per ogni indirizzo \(\alpha=(a_{m-1},\dots,a_0)\),
-\[
-\T\cdot(\T'\cdot\alpha)
-=
-(\rho_{m-1}(\rho'_{m-1}(a_{m-1})),\dots,
- \rho_0(\rho'_0(a_0))).
-\]
-Il membro destro coincide con \((\T\T')\cdot\alpha\), dove il prodotto in
-\(S_b^m\) è eseguito componente per componente. L'elemento
-\((\operatorname{id},\dots,\operatorname{id})\) agisce come identità.
-\end{proof}
-
-Nel caso delle ventisette carte,
-\[
-b=m=3,
-\]
-e il gruppo dei tabelloni è
-\[
-S_3^3.
-\]
-Poiché \(|S_3|=6\),
-\[
-|S_3^3|=6^3=216.
-\]
-I 216 elementi rappresentano tutte le possibili terne ordinate di regole di
-raccolta, considerate al livello della procedura completa.
-
-\section{Rappresentazione di Kronecker e immersione in \texorpdfstring{\(S_{b^m}\)}{S su b alla m elementi}}
-
-A ogni componente \(\rho_i\in S_b\) associamo la matrice di permutazione
-\(P_i\), con la convenzione
-\[
-P_ie_j=e_{\rho_i(j)}.
-\]
-Dato un tabellone
-\[
-\T=(\rho_{m-1},\dots,\rho_0),
-\]
-definiamo
-\[
-K_{\T}=P_{m-1}\otimes\cdots\otimes P_0.
-\]
-
-\begin{proposition}
-Per ogni indirizzo digitale \(\alpha\),
-\[
-K_{\T}e_\alpha=e_{\T\cdot\alpha}.
-\]
-\end{proposition}
-
-\begin{proof}
-Se \(\alpha=(a_{m-1},\dots,a_0)\), allora
-\[
-\begin{aligned}
-K_{\T}e_\alpha
-&=
-(P_{m-1}e_{a_{m-1}})\otimes\cdots\otimes(P_0e_{a_0})\\
-&=
-e_{\rho_{m-1}(a_{m-1})}\otimes\cdots\otimes e_{\rho_0(a_0)}\\
-&=
-e_{\T\cdot\alpha}.
-\end{aligned}
-\]
-\end{proof}
-
-È opportuno distinguere la permutazione delle posizioni dalla matrice che la
-rappresenta. Definiamo quindi
-\[
-\pi_{\T}(\val(\alpha))
-=
-\val(\T\cdot\alpha).
-\]
-Poiché \(\val\) è biiettiva e ogni \(\rho_i\) è una permutazione,
-\(\pi_{\T}\in S_{b^m}\). La matrice di permutazione associata a
-\(\pi_{\T}\) è precisamente \(K_{\T}\).
-
-\begin{proposition}
-L'applicazione
-\[
-\Phi:S_b^m\longrightarrow S_{b^m},
-\qquad
-\T\longmapsto\pi_{\T},
-\]
-è un omomorfismo di gruppi.
-\end{proposition}
-
-\begin{proof}
-Per ogni indirizzo \(\alpha\),
-\[
-(\T\T')\cdot\alpha
-=
-\T\cdot(\T'\cdot\alpha).
-\]
-Applicando \(\val\) e usando la definizione di \(\pi_{\T}\), si ottiene
-\[
-\pi_{\T\T'}
-=
-\pi_{\T}\circ\pi_{\T'}.
-\]
-Equivalentemente, a livello matriciale,
-\[
-K_{\T}K_{\T'}
-=
-(P_{m-1}P'_{m-1})\otimes\cdots\otimes(P_0P'_0)
-=
-K_{\T\T'}.
-\]
-\end{proof}
-
-\begin{proposition}
-L'omomorfismo \(\Phi\) è iniettivo.
-\end{proposition}
-
-\begin{proof}
-Supponiamo \(\pi_{\T}=\operatorname{id}\). Allora
-\[
-\T\cdot\alpha=\alpha
-\]
-per ogni indirizzo \(\alpha\). Fissato un indice \(i\), variamo soltanto la
-cifra \(a_i\) e manteniamo costanti tutte le altre. Dalla definizione
-dell'azione segue
-\[
-\rho_i(a_i)=a_i
-\]
-per ogni \(a_i\in\{0,\dots,b-1\}\). Quindi
-\(\rho_i=\operatorname{id}\) per ogni \(i\), e
-\[
-\T=(\operatorname{id},\dots,\operatorname{id}).
-\]
-Il nucleo di \(\Phi\) è dunque banale.
-\end{proof}
-
-\begin{theorem}
-Il gruppo dei tabelloni ammette un'immersione naturale nel gruppo simmetrico
-delle \(b^m\) posizioni:
-\[
-S_b^m\hookrightarrow S_{b^m}.
-\]
-La matrice della permutazione associata a \(\T\) è
-\[
-K_{\T}=P_{m-1}\otimes\cdots\otimes P_0.
-\]
-\end{theorem}
-
-Nel caso classico,
-\[
-S_3^3\hookrightarrow S_{27}.
-\]
-L'immagine contiene 216 permutazioni, mentre
-\[
-|S_{27}|=27!.
-\]
-I tabelloni individuano pertanto una sottoclasse estremamente strutturata delle
-permutazioni delle 27 posizioni.
-
-\section{Permutazioni digitalmente separabili}
-
-L'immagine di \(\Phi\) può essere caratterizzata senza fare riferimento alla
-costruzione fisica del gioco.
-
-\begin{definition}
-Una permutazione \(\pi\in S_{b^m}\) si dice \emph{digitalmente separabile} se
-esistono permutazioni
-\[
-\rho_0,\dots,\rho_{m-1}\in S_b
-\]
-tali che, per ogni indirizzo
-\[
-\alpha=(a_{m-1},\dots,a_0),
-\]
-si abbia
-\[
-\pi(\val(\alpha))
-=
-\val(\rho_{m-1}(a_{m-1}),\dots,\rho_0(a_0)).
-\]
-\end{definition}
-
-\begin{proposition}
-Una permutazione \(\pi\in S_{b^m}\) appartiene all'immagine di \(\Phi\) se e
-solo se è digitalmente separabile.
-\end{proposition}
-
-\begin{proof}
-Se \(\pi=\pi_{\T}\) per un tabellone
-\(\T=(\rho_{m-1},\dots,\rho_0)\), la proprietà segue direttamente dalla
-definizione di \(\pi_{\T}\). Viceversa, se \(\pi\) è digitalmente separabile,
-le permutazioni \(\rho_i\) definiscono un tabellone \(\T\in S_b^m\) e la
-formula precedente mostra che \(\pi=\pi_{\T}\).
-\end{proof}
-
-La condizione di separabilità esprime il vincolo fondamentale imposto dal
-tabellone: la cifra finale di livello \(i\) dipende soltanto dalla cifra
-iniziale dello stesso livello. Una permutazione arbitraria di \(S_{b^m}\) può
-invece accoppiare livelli differenti dell'indirizzo.
-
-\section{Fibre digitali e ricostruzione del tabellone}
-
-Per ogni livello \(i\in\{0,\dots,m-1\}\) e ogni valore
-\(t\in\{0,\dots,b-1\}\), definiamo la fibra digitale
-\[
-F_{i,t}
-=
-\{\alpha=(a_{m-1},\dots,a_0):a_i=t\}.
-\]
-La fibra contiene tutti gli indirizzi nei quali la cifra di livello \(i\) è
-uguale a \(t\), e ha cardinalità
-\[
-|F_{i,t}|=b^{m-1}.
-\]
-
-Per un tabellone \(\T\), poniamo
-\[
-\Sigma_{i,t}(\T)
-=
-\sum_{\alpha\in F_{i,t}}
-\val(\T\cdot\alpha).
-\]
-
-\begin{proposition}
-Per ogni \(i\) e \(t\),
-\[
-\Sigma_{i,t}(\T)
-=
-C_i+b^{m-1+i}\rho_i(t),
-\]
-dove
-\[
-C_i
-=
-b^{m-2}\frac{b(b-1)}2
-\sum_{\substack{0\le j\le m-1\\j\ne i}}b^j.
-\]
-\end{proposition}
-
-\begin{proof}
-Per definizione,
-\[
-\val(\T\cdot\alpha)
-=
-\sum_{j=0}^{m-1}b^j\rho_j(a_j).
-\]
-Sulla fibra \(F_{i,t}\), la cifra \(a_i\) è fissata e vale \(t\). Il contributo
-del livello \(i\) è pertanto
-\[
-\sum_{\alpha\in F_{i,t}}b^i\rho_i(t)
-=
-b^{m-1+i}\rho_i(t).
-\]
-
-Per ogni livello \(j\ne i\), la cifra \(a_j\) assume ciascun valore di
-\(\{0,\dots,b-1\}\) esattamente \(b^{m-2}\) volte. Poiché \(\rho_j\) è una
-permutazione,
-\[
-\sum_{u=0}^{b-1}\rho_j(u)
-=
-\sum_{u=0}^{b-1}u
-=
-\frac{b(b-1)}2.
-\]
-Il contributo del livello \(j\ne i\) è quindi
-\[
-b^j b^{m-2}\frac{b(b-1)}2.
-\]
-Sommando tali contributi si ottiene \(C_i\), e la formula segue.
-\end{proof}
-
-\begin{corollary}
-Le quantità \(\Sigma_{i,t}(\T)\) determinano le componenti del tabellone. In
-particolare,
-\[
-\rho_i(t)
-=
-\frac{\Sigma_{i,t}(\T)-C_i}{b^{m-1+i}}.
-\]
-\end{corollary}
-
-\begin{proof}
-È una conseguenza immediata della proposizione precedente.
-\end{proof}
-
-Ripetendo il calcolo per tutti gli indici \(i\) e per tutti i valori \(t\), si
-ricostruiscono le permutazioni
-\[
-\rho_0,\dots,\rho_{m-1}.
-\]
-Le somme sulle fibre non sono dunque semplici quantità invarianti rispetto a
-una particolare enumerazione: nel modello considerato costituiscono dati
-sufficienti per ricostruire integralmente il tabellone.
-
-\section{Il caso delle ventisette carte}
-
-Poniamo ora
-\[
-b=m=3.
-\]
-Le posizioni sono numerate da \(0\) a \(26\) e ogni posizione ha una scrittura
-ternaria
-\[
-x=(a_2a_1a_0)_3.
-\]
-Il gruppo dei tabelloni è \(S_3^3\), di ordine
-\[
-|S_3^3|=6^3=216.
-\]
-Le fibre digitali hanno cardinalità
-\[
-3^{3-1}=9.
-\]
-
-La formula generale diventa
-\[
-\Sigma_{i,t}(\T)
-=
-C_i+3^{2+i}\rho_i(t).
-\]
-I valori possibili sono riportati nella tabella seguente:
-
-\begin{center}
-\begin{tabular}{c@{\qquad}ccc}
-\toprule
-\(i\) & \(\rho_i(t)=0\) & \(\rho_i(t)=1\) & \(\rho_i(t)=2\)\\
-\midrule
-0 & 108 & 117 & 126\\
-1 &  90 & 117 & 144\\
-2 &  36 & 117 & 198\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-Le differenze fra valori consecutivi, per i tre livelli, sono
-\[
-9,\qquad 27,\qquad 81.
-\]
-Esse coincidono con i coefficienti \(3^{2+i}\) della formula di ricostruzione.
-Di conseguenza, per ogni livello \(i\), il valore della somma sulla fibra
-individua senza ambiguità \(\rho_i(t)\).
-
-Un aspetto degno di nota è il valore comune
-\[
-117
-\]
-che compare quando \(\rho_i(t)=1\), indipendentemente dal livello \(i\). La
-coincidenza deriva dalla compensazione fra il termine costante \(C_i\) e il
-peso posizionale \(3^{2+i}\); non esprime un'ulteriore simmetria del gruppo,
-ma è una conseguenza aritmetica della formula generale nel caso \(b=m=3\).
-
-\section{Invarianti strutturali}
-
-Sia
-\[
-\T=(\rho_{m-1},\dots,\rho_0)\in S_b^m.
-\]
-Poiché l'azione è componente per componente, diversi invarianti della
-permutazione globale possono essere letti direttamente dai fattori locali.
-
-\begin{proposition}
-L'ordine della permutazione \(\pi_{\T}\), e quindi della matrice
-\(K_{\T}\), è
-\[
-\ord(\pi_{\T})
-=
-\ord(K_{\T})
-=
-\mcm\bigl(
-\ord(\rho_{m-1}),\dots,\ord(\rho_0)
-\bigr).
-\]
-\end{proposition}
-
-\begin{proof}
-La potenza \(\T^n\) è l'identità se e solo se
-\(\rho_i^n=\operatorname{id}\) per ogni \(i\). Il minimo intero positivo con
-questa proprietà è il minimo comune multiplo degli ordini delle componenti.
-L'iniettività di \(\Phi\) trasferisce lo stesso ordine a \(\pi_{\T}\) e alla
-sua matrice di permutazione.
-\end{proof}
-
-\begin{proposition}
-Il numero di posizioni fisse di \(\pi_{\T}\) è
-\[
-\prod_{i=0}^{m-1}\fix(\rho_i).
-\]
-\end{proposition}
-
-\begin{proof}
-Un indirizzo \((a_{m-1},\dots,a_0)\) è fisso se e solo se
-\[
-\rho_i(a_i)=a_i
-\]
-per ogni \(i\). Le scelte delle cifre fisse sono indipendenti fra i diversi
-livelli, per cui le cardinalità si moltiplicano.
-\end{proof}
-
-\begin{proposition}
-Il numero delle classi di coniugio di \(S_b^m\) è
-\[
-p(b)^m,
-\]
-dove \(p(b)\) è il numero delle partizioni di \(b\).
-\end{proposition}
-
-\begin{proof}
-Le classi di coniugio di \(S_b\) sono parametrizzate dalle partizioni di
-\(b\). Nel prodotto diretto \(S_b^m\), due elementi sono coniugati se e solo
-se le componenti corrispondenti sono coniugate in \(S_b\). Le classi si
-scelgono quindi indipendentemente nei \(m\) fattori.
-\end{proof}
-
-Nel caso \(b=3\), il gruppo \(S_3\) possiede tre classi di coniugio,
-corrispondenti ai tipi ciclici
-\[
-1^3,\qquad 2\,1,\qquad 3.
-\]
-Possiamo indicarle, rispettivamente, con \(I\), \(T\) e \(R\). Per il gruppo
-dei tabelloni delle ventisette carte si ottengono quindi
-\[
-3^3=27
-\]
-classi di coniugio interne a \(S_3^3\).
-
-È importante precisare il livello al quale vale questa classificazione: le 27
-classi sono classi di coniugio del gruppo dei tabelloni. L'immersione in
-\(S_{27}\) conserva l'azione del gruppo, ma la coniugazione nel gruppo
-simmetrico più grande è una relazione differente e può identificare elementi
-che non sono coniugati all'interno di \(S_3^3\).
-
-\section{Discussione}
-
-La lettura posizionale del gioco di Gergonne e la sua relazione con
-l'ordinamento per cifre sono classiche \cite{bolker}; generalizzazioni del
-trucco mediante sistemi dinamici discreti sono state studiate, fra gli altri,
-da Champanerkar e Jani \cite{champanerkar-jani} e da Quintero
-\cite{quintero}. La teoria delle matrici di commutazione e dei prodotti di
-Kronecker dispone inoltre di un formalismo consolidato
-\cite{henderson-searle}.
-
-La prospettiva adottata qui consiste nel mantenere simultaneamente tre livelli
-di descrizione. Il primo è quello posizionale, nel quale una carta è
-identificata da una parola di \(m\) cifre in base \(b\). Il secondo è quello
-tensoriale, nel quale la distribuzione fisica appare come permutazione ciclica
-dei fattori e la procedura completa come prodotto di Kronecker. Il terzo è
-quello gruppale, nel quale i tabelloni formano il prodotto diretto \(S_b^m\) e
-si immergono nel gruppo simmetrico globale.
-
-In questo quadro, la separabilità digitale non è soltanto una proprietà della
-notazione: caratterizza esattamente l'immagine di \(S_b^m\) in \(S_{b^m}\).
-Le somme sulle fibre digitali forniscono poi una procedura esplicita di
-ricostruzione delle componenti locali a partire dall'azione globale del
-tabellone.
-
-L'appendice mostra anche il limite naturale di questa struttura. Se il numero
-di carte è soltanto fattorizzato come \(N=ij\), le coordinate quota e colonna
-non sono più livelli omogenei di una stessa base. Rimane il linguaggio delle
-permutazioni di fattori, ora espresso mediante la matrice di commutazione
-\(K_{j,i}\), ma la chiusura digitale tipica del caso \(b^m\) non è più
-disponibile in generale.
-
-\section{Conclusioni}
-
-Il caso delle ventisette carte può essere inserito in una famiglia di
-procedure definite su \(N=b^m\) posizioni. La scrittura in base \(b\) rende le
-posizioni un prodotto cartesiano di \(m\) livelli omogenei, e il corrispondente
-spazio vettoriale assume la forma tensoriale
-\[
-E_b^{\otimes m}.
-\]
-
-Nel singolo stadio, la distribuzione ruota ciclicamente i fattori e la raccolta
-agisce sul fattore portato in prima posizione. Dopo \(m\) stadi, ogni cifra è
-stata esposta una volta e la rotazione si richiude. La trasformazione globale
-è quindi rappresentata dal prodotto di Kronecker
-\[
-K_{\T}=P_{m-1}\otimes\cdots\otimes P_0.
-\]
-
-Questa rappresentazione realizza un'immersione
-\[
-S_b^m\hookrightarrow S_{b^m}
-\]
-e identifica l'immagine con le permutazioni digitalmente separabili. Ordine,
-punti fissi e classi di coniugio interne al gruppo dei tabelloni si leggono
-componente per componente. Le somme sulle fibre digitali permettono inoltre
-di ricostruire le permutazioni locali \(\rho_i\) e, con esse, l'intero
-tabellone.
-
-La struttura essenziale del gioco non risiede dunque soltanto nella relazione
-numerica \(27=3^3\), ma nella compatibilità fra scrittura posizionale,
-permutazione ciclica dei fattori e azione separata sui livelli dell'indirizzo.
-È questa compatibilità a trasformare una successione di raccolte di carte in
-un oggetto algebrico rigidamente organizzato.
-
-\appendix
-
-\section{Il caso rettangolare \texorpdfstring{\(N=i\,j\)}{N=ij} e le matrici di commutazione}
-
-La costruzione precedente dipende in modo essenziale dall'omogeneità della
-fattorizzazione
-\[
-N=b^m.
-\]
-Esistono tuttavia giochi basati sulla distribuzione in colonne nei quali il
-numero delle carte assume la forma
-\[
-N=i\,j
-\]
-con fattori generalmente differenti. Il gioco delle ventuno carte,
-\[
-21=3\cdot7,
-\]
-ne è l'esempio classico. Le analisi tramite sistemi dinamici discreti e punti
-fissi sono ben note \cite{champanerkar-jani,quintero}; qui interessa soprattutto
-il confronto con la struttura tensoriale sviluppata nelle sezioni precedenti.
-
-\subsection{Coordinate rettangolari e passaggio fisico}
-
-Supponiamo che il mazzo venga distribuito ciclicamente in \(i\) colonne di
-lunghezza \(j\). Ogni posizione
-\[
-x\in\{0,\dots,ij-1\}
-\]
-si scrive in modo unico come
-\[
-x=iq+r,
-\qquad
-r=x\bmod i,
-\qquad
-q=\left\lfloor\frac{x}{i}\right\rfloor,
-\]
-con
-\[
-0\le r<i,
-\qquad
-0\le q<j.
-\]
-Il resto \(r\) individua la colonna e il quoziente \(q\) la quota all'interno
-della colonna. L'indirizzo lineare viene quindi riscritto nella coppia
-\[
-(q,r).
-\]
-
-Sul piano tensoriale associamo alla posizione \(x=iq+r\) il vettore
-\[
-e_q^{(j)}\otimes e_r^{(i)}
-\in
-\mathbb R^j\otimes\mathbb R^i.
-\]
-La raccolta per colonne richiede di scambiare l'ordine delle due coordinate.
-Questo scambio è realizzato dalla matrice di commutazione
-\[
-K_{j,i}:
-\mathbb R^j\otimes\mathbb R^i
-\longrightarrow
-\mathbb R^i\otimes\mathbb R^j,
-\]
-definita da
-\[
-K_{j,i}
-\bigl(e_q^{(j)}\otimes e_r^{(i)}\bigr)
-=
-e_r^{(i)}\otimes e_q^{(j)}.
-\]
-Le matrici di questo tipo sono note anche come \emph{vec-permutation matrices}
-\cite{henderson-searle}. In particolare,
-\[
-K_{j,i}^{-1}=K_{i,j}=K_{j,i}^{\top}.
-\]
-
-Sia ora \(\tau\in S_i\) la permutazione che assegna alla colonna \(r\) la
-nuova posizione di blocco \(\tau(r)\), e sia \(P_\tau\) la corrispondente
-matrice di permutazione. Se l'ordine interno delle colonne viene conservato,
-la trasformazione delle posizioni è
-\[
-\pi_\tau(iq+r)=j\,\tau(r)+q.
-\]
-La matrice del passaggio fisico è
-\[
-M_\tau
-=
-(P_\tau\otimes I_j)K_{j,i}.
-\]
-Infatti,
-\[
-\begin{aligned}
-(P_\tau\otimes I_j)K_{j,i}
-\bigl(e_q^{(j)}\otimes e_r^{(i)}\bigr)
-&=
-(P_\tau\otimes I_j)
-\bigl(e_r^{(i)}\otimes e_q^{(j)}\bigr)\\
-&=
-e_{\tau(r)}^{(i)}\otimes e_q^{(j)}.
-\end{aligned}
-\]
-Ogni \(M_\tau\) è una matrice di permutazione \(ij\times ij\) e quindi è
-invertibile.
-
-\subsection{Il rapporto fra \texorpdfstring{\(K_{j,i}\)}{K} e \texorpdfstring{\(\MSC_m\)}{M}}
-
-La matrice \(K_{j,i}\) e l'operatore \(\MSC_m\) esprimono lo stesso principio
-generale: la permutazione dei fattori di un prodotto tensoriale. Il loro ruolo
-strutturale è però differente.
-
-La matrice
-\[
-K_{j,i}
-\]
-realizza la commutazione fondamentale di due fattori, che possono avere
-dimensioni diverse:
-\[
-\mathbb R^j\otimes\mathbb R^i
-\longrightarrow
-\mathbb R^i\otimes\mathbb R^j.
-\]
-L'operatore
-\[
-\MSC_m
-\]
-realizza invece una permutazione ciclica di \(m\) fattori omogenei:
-\[
-E_b^{\otimes m}
-\longrightarrow
-E_b^{\otimes m}.
-\]
-Esso può essere visto come una particolare permutazione di fattori ottenibile
-componendo scambi elementari. La relazione
-\[
-\MSC_m^m=I
-\]
-deriva dalla ciclicità della permutazione e dalla presenza di \(m\) livelli
-omogenei.
-
-Nel caso rettangolare, invece, le coordinate
-\[
-(\text{quota},\text{colonna})
-\]
-hanno in generale dimensioni e significati differenti. La relazione
-\[
-K_{i,j}K_{j,i}=I
-\]
-afferma che un singolo scambio può essere invertito, ma non produce una
-chiusura digitale analoga a quella del caso \(b^m\). La distinzione non
-riguarda quindi la presenza o l'assenza di una permutazione dei fattori: in
-entrambi i casi tale permutazione è essenziale. Ciò che cambia è l'omogeneità
-dei fattori e, con essa, la possibilità di organizzare l'intera procedura come
-lettura successiva delle cifre di una stessa base.
-
-\subsection{Dinamica fisica e dinamica informativa}
-
-Nel gioco delle ventuno carte l'ordine di raccolta non è fissato una volta per
-tutte. Dopo ogni distribuzione, il partecipante indica la colonna che contiene
-la carta scelta e il prestigiatore colloca quella colonna al centro.
-
-Supponiamo, più in generale, che la colonna indicata venga sempre collocata
-nella posizione di blocco
-\[
-c\in\{0,\dots,i-1\}.
-\]
-Per ogni possibile colonna \(r\), si sceglie una permutazione
-\[
-\tau_r\in S_i
-\]
-tale che
-\[
-\tau_r(r)=c.
-\]
-Fissata la risposta \(r\), l'intero mazzo subisce la permutazione invertibile
-\[
-M_{\tau_r}
-=
-(P_{\tau_r}\otimes I_j)K_{j,i}.
-\]
-
-La posizione della sola carta scelta segue invece una mappa adattiva. Se
-\[
-x=iq+r,
-\]
-la carta si trova alla quota \(q\) della colonna \(r\); dopo la raccolta di
-quella colonna nel blocco \(c\), la nuova posizione è
-\[
-jc+q.
-\]
-Pertanto
-\[
-F_c(x)
-=
-jc+\left\lfloor\frac{x}{i}\right\rfloor.
-\]
-La mappa \(F_c\) non rappresenta una singola permutazione del mazzo: seleziona,
-per ciascuna posizione ipotetica, il ramo del protocollo determinato dalla
-colonna che verrebbe indicata. Per ogni \(q\),
-\[
-F_c(iq)
-=
-F_c(iq+1)
-=
-\cdots
-=
-F_c(iq+i-1)
-=
-jc+q,
-\]
-quindi \(F_c\) è molti-a-uno.
-
-Se \(X\) è l'insieme delle posizioni ancora compatibili con le informazioni
-disponibili, definiamo
-\[
-F_c(X)=\{F_c(x):x\in X\}.
-\]
-L'evoluzione dell'incertezza è descritta da
-\[
-X_{n+1}=F_c(X_n).
-\]
-La dinamica fisica del mazzo rimane reversibile; ciò che si contrae è lo spazio
-delle posizioni compatibili con la carta scelta.
-
-\subsection{Il gioco delle ventuno carte}
-
-Per
-\[
-i=3,
-\qquad
-j=7,
-\qquad
-c=1,
-\]
-la mappa precedente diventa
-\[
-F(x)
-=
-7+\left\lfloor\frac{x}{3}\right\rfloor.
-\]
-Partendo dall'insieme iniziale
-\[
-X_0=\{0,1,\dots,20\},
-\]
-si ottiene
-\[
-X_1=\{7,8,\dots,13\},
-\qquad
-X_2=\{9,10,11\},
-\qquad
-X_3=\{10\}.
-\]
-In termini di cardinalità,
-\[
-21\longmapsto7\longmapsto3\longmapsto1.
-\]
-Con la numerazione a partire da zero, la carta termina nella posizione \(10\),
-cioè nell'undicesima posizione secondo la numerazione ordinaria.
-
-Questo esempio mette in evidenza la differenza fra il caso perfetto e il caso
-rettangolare. Nel primo, la struttura omogenea di \(E_b^{\otimes m}\) consente
-una chiusura digitale e una lettura separata delle cifre. Nel secondo, la
-matrice \(K_{j,i}\) conserva il ruolo fondamentale di permutazione dei fattori,
-ma la determinazione della carta avviene attraverso la contrazione della
-dinamica informativa. Sul piano fisico, il mazzo continua a essere permutato
-senza perdita di informazione; sul piano delle possibilità, l'incertezza si
-riduce fino a un solo elemento.
-
-\begin{thebibliography}{9}
-
-\bibitem{bolker}
-E.~D. Bolker,
-\emph{Gergonne's Card Trick, Positional Notation, and Radix Sort},
-Mathematics Magazine \textbf{83} (2010), no.~1, 46--49.
-\href{https://doi.org/10.4169/002557010X479983}{doi:10.4169/002557010X479983}.
-
-\bibitem{champanerkar-jani}
-J. Champanerkar and M. Jani,
-\emph{Using a Card Trick to Illustrate Fixed Points and Stability},
-PRIMUS \textbf{25} (2015), no.~5, 473--483.
-\href{https://doi.org/10.1080/10511970.2015.1031308}{doi:10.1080/10511970.2015.1031308}.
-
-\bibitem{diaconis-graham-kantor}
-P. Diaconis, R.~L. Graham and W.~M. Kantor,
-\emph{The Mathematics of Perfect Shuffles},
-Advances in Applied Mathematics \textbf{4} (1983), 175--196.
-\href{https://doi.org/10.1016/0196-8858(83)90009-X}{doi:10.1016/0196-8858(83)90009-X}.
-
-\bibitem{henderson-searle}
-H.~V. Henderson and S.~R. Searle,
-\emph{The Vec-Permutation Matrix, the Vec Operator and Kronecker Products: A Review},
-Linear and Multilinear Algebra \textbf{9} (1981), no.~4, 271--288.
-\href{https://doi.org/10.1080/03081088108817379}{doi:10.1080/03081088108817379}.
-
-\bibitem{quintero}
-R. Quintero,
-\emph{On a Mathematical Model for an Old Card Trick},
-Recreational Mathematics Magazine \textbf{4} (2017), no.~7, 65--77.
-\href{https://doi.org/10.1515/rmm-2017-0014}{doi:10.1515/rmm-2017-0014}.
-
-\end{thebibliography}
-
+	
+	\maketitle
+	
+	\begin{abstract}
+		Si considera una famiglia di procedure su \(N=b^m\) posizioni, ottenute
+		ripetendo per \(m\) stadi la distribuzione ciclica in \(b\) mazzetti e la
+		loro raccolta secondo una permutazione assegnata. La scrittura in base \(b\)
+		identifica le posizioni con le parole di \(D_b^m\), dove
+		\(D_b=\{0,\dots,b-1\}\), e descrive il ciclo completo mediante un'azione
+		separata sulle cifre. La trasformazione globale possiede la fattorizzazione
+		matriciale
+		\[
+		P_{\boldsymbol{\rho}}
+		=
+		P_{m-1}\otimes\cdots\otimes P_0.
+		\]
+		Si dimostra una caratterizzazione intrinseca delle permutazioni così
+		ottenute: esse sono esattamente le permutazioni che preservano, per ogni
+		livello, la partizione delle posizioni determinata dal valore della cifra
+		corrispondente. La caratterizzazione fornisce l'unicità dei fattori locali e
+		realizza un'immersione \(S_b^m\hookrightarrow S_{b^m}\). Si introducono poi
+		statistiche aggregate sulle fibre digitali e si prova che, all'interno di
+		questa classe, esse determinano integralmente le permutazioni locali. Il caso
+		\(b=m=3\) viene sviluppato esplicitamente e collegato al gioco delle
+		ventisette carte. Un'appendice confronta infine la struttura omogenea
+		\(b^m\) con il caso rettangolare \(N=ij\) e con la contrazione informativa
+		del gioco delle ventuno carte.
+	\end{abstract}
+	
+	\section{Introduzione}
+	
+	Il gioco delle ventisette carte appartiene alla famiglia dei procedimenti
+	classici nei quali una distribuzione ripetuta traduce informazioni operative
+	in cifre di una scrittura posizionale. L'identità
+	\[
+	27=3^3
+	\]
+	permette di distribuire il mazzo in tre mazzetti e di ripetere il gesto per
+	tre stadi; le posizioni occupate, nelle raccolte successive, dai mazzetti che
+	contengono una carta determinano progressivamente le cifre ternarie della sua
+	posizione finale. Il legame con la notazione posizionale e con gli algoritmi
+	di ordinamento per cifre è classico nella letteratura sul trucco di Gergonne
+	\cite{bolker}.
+	
+	Il modello qui studiato isola una versione non adattiva del procedimento. Si
+	fissano interi
+	\[
+	b\ge 2,
+	\qquad
+	m\ge 2,
+	\]
+	e un mazzo di \(N=b^m\) carte. In ciascuno dei \(m\) stadi il mazzo viene
+	distribuito ciclicamente in \(b\) mazzetti, conservando l'ordine interno, e i
+	mazzetti vengono raccolti secondo una permutazione di \(S_b\) stabilita per
+	quello stadio. Non sono ammessi rovesciamenti del mazzo né scelte adattive
+	dipendenti dalla posizione di una carta. La successione delle permutazioni di
+	raccolta forma un codice locale
+	\[
+	\boldsymbol{\rho}
+	=
+	(\rho_{m-1},\dots,\rho_0)
+	\in S_b^m,
+	\]
+	che determina una permutazione globale delle \(b^m\) posizioni.
+	
+	La domanda centrale non riguarda soltanto il calcolo di questa permutazione.
+	Occorre riconoscere, fra tutti gli elementi di \(S_{b^m}\), quelli che possono
+	nascere dal procedimento, individuare la fattorizzazione locale nascosta nella
+	loro azione e stabilire quali informazioni aggregate siano sufficienti a
+	ricostruirla. La scrittura posizionale, il prodotto tensoriale e l'azione del
+	gruppo diretto \(S_b^m\) convergono così nello stesso problema.
+	
+	Il ciclo fisico viene dapprima descritto mediante una rotazione dei fattori
+	tensoriali; dopo \(m\) stadi la rotazione si chiude e la matrice globale si
+	separa in un prodotto di Kronecker. Il risultato conduce a una
+	caratterizzazione intrinseca: una permutazione globale appartiene alla classe
+	considerata esattamente quando preserva, livello per livello, le partizioni
+	digitali delle posizioni. Le permutazioni locali sono allora determinate in
+	modo unico. Su questa classe, le somme delle immagini lungo le fibre digitali
+	costituiscono inoltre un insieme di statistiche aggregate sufficiente alla
+	ricostruzione completa del codice.
+	
+	Il formalismo dei prodotti di Kronecker e delle matrici di commutazione è
+	standard; per le identità fondamentali si rinvia a Henderson e Searle
+	\cite{henderson-searle}. La teoria dei perfect shuffles offre un contesto più
+	ampio per lo studio algebrico delle permutazioni di mazzi \cite{diaconis-graham-kantor},
+	mentre analisi dinamiche di giochi di carte affini compaiono, fra gli altri,
+	in Champanerkar e Jani \cite{champanerkar-jani} e Quintero \cite{quintero}.
+	
+	\section{Modello posizionale e procedura ordinaria}
+	
+	Sia
+	\[
+	\Db=\{0,1,\dots,b-1\}.
+	\]
+	Le posizioni del mazzo sono numerate da \(0\) a \(b^m-1\). Ogni posizione
+	possiede una rappresentazione unica
+	\[
+	x=(a_{m-1}a_{m-2}\cdots a_1a_0)_b,
+	\qquad
+	a_i\in\Db,
+	\]
+	ossia
+	\[
+	x=a_{m-1}b^{m-1}+a_{m-2}b^{m-2}+\cdots+a_1b+a_0.
+	\]
+	Per
+	\[
+	\alpha=(a_{m-1},\dots,a_0)\in\Db^m
+	\]
+	si pone
+	\[
+	\val(\alpha)
+	=
+	\sum_{i=0}^{m-1}a_i b^i.
+	\]
+	La funzione \(\val\) è una biiezione fra \(\Db^m\) e
+	\(\{0,\dots,b^m-1\}\).
+	
+	Durante un singolo stadio, la posizione
+	\[
+	x=bq+r,
+	\qquad
+	r=x\bmod b,
+	\qquad
+	q=\left\lfloor\frac{x}{b}\right\rfloor
+	\]
+	viene distribuita nel mazzetto identificato dal resto \(r\). Se una
+	permutazione \(\rho\in S_b\) colloca quel mazzetto nella posizione di blocco
+	\(\rho(r)\), la nuova posizione è
+	\[
+	x'
+	=
+	\rho(r)b^{m-1}
+	+
+	\left\lfloor\frac{x}{b}\right\rfloor.
+	\]
+	La cifra meno significativa viene così estratta dall'indirizzo e reinserita
+	come cifra più significativa, dopo l'azione della permutazione di raccolta.
+	
+	\begin{proposition}[Ricorrenza posizionale]
+		Siano \(\rho_0,\dots,\rho_{k-1}\in S_b\) le permutazioni usate nei primi
+		\(k\) stadi, con \(1\le k\le m\), e sia
+		\[
+		x_0=(a_{m-1}\cdots a_0)_b.
+		\]
+		Allora
+		\[
+		\begin{aligned}
+			x_k
+			={}&
+			\rho_{k-1}(a_{k-1})b^{m-1}
+			+\rho_{k-2}(a_{k-2})b^{m-2}
+			+\cdots
+			+\rho_0(a_0)b^{m-k}
+			\\
+			&+
+			\left\lfloor\frac{x_0}{b^k}\right\rfloor.
+		\end{aligned}
+		\]
+		In particolare, dopo \(m\) stadi,
+		\[
+		x_m
+		=
+		\sum_{i=0}^{m-1}\rho_i(a_i)b^i.
+		\]
+	\end{proposition}
+	
+	\begin{proof}
+		Per \(k=1\) la formula coincide con la regola del singolo stadio. Se essa
+		vale per un certo \(k<m\), la cifra successivamente estratta dal termine
+		\(\lfloor x_0/b^k\rfloor\) è \(a_k\), mentre ciascuno dei termini già
+		prodotti è divisibile per \(b\). La relazione
+		\[
+		x_{k+1}
+		=
+		\rho_k(a_k)b^{m-1}
+		+
+		\left\lfloor\frac{x_k}{b}\right\rfloor
+		\]
+		fornisce quindi la formula con \(k+1\) al posto di \(k\). Per \(k=m\), il
+		termine \(\lfloor x_0/b^m\rfloor\) è nullo e le cifre trasformate occupano i
+		livelli originari.
+	\end{proof}
+	
+	Nel caso \(b=m=3\), la formula descrive il ciclo completo del gioco delle
+	ventisette carte. Il suo significato tensoriale permette di distinguere con
+	precisione l'operatore di uno stadio dalla trasformazione finale.
+	
+	\section{Dinamica tensoriale del ciclo completo}
+	
+	Sia
+	\[
+	E_b=\mathbb R^b
+	\]
+	con base canonica \(e_0,\dots,e_{b-1}\). All'indirizzo
+	\(\alpha=(a_{m-1},\dots,a_0)\) si associa il tensore
+	\[
+	e_\alpha
+	=
+	e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}
+	\in E_b^{\otimes m}.
+	\]
+	La distribuzione ciclica è rappresentata dall'operatore
+	\[
+	\MSC_m:E_b^{\otimes m}\longrightarrow E_b^{\otimes m}
+	\]
+	definito sui tensori di base da
+	\[
+	\MSC_m
+	\left(
+	e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}
+	\right)
+	=
+	e_{a_0}\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_1}.
+	\]
+	Esso realizza una rotazione ciclica dei fattori e soddisfa
+	\[
+	\MSC_m^m=I.
+	\]
+	
+	Sia \(P_h\) la matrice di permutazione associata a \(\rho_h\), secondo la
+	convenzione
+	\[
+	P_he_r=e_{\rho_h(r)}.
+	\]
+	L'operatore dello stadio \(h\), con \(h=0,\dots,m-1\), è
+	\[
+	T_h
+	=
+	(P_h\otimes I_b^{\otimes(m-1)})\circ\MSC_m.
+	\]
+	La rotazione porta la cifra da elaborare nel primo fattore; la raccolta
+	applica poi \(P_h\) a quel fattore. La separazione delle azioni locali emerge
+	soltanto dopo il ciclo completo.
+	
+	\begin{theorem}[Chiusura tensoriale del ciclo]
+		Con le convenzioni precedenti,
+		\[
+		T_{m-1}\circ\cdots\circ T_1\circ T_0
+		=
+		P_{m-1}\otimes P_{m-2}\otimes\cdots\otimes P_0.
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		Applicando successivamente gli operatori a
+		\[
+		e_{a_{m-1}}\otimes\cdots\otimes e_{a_0},
+		\]
+		dopo il primo stadio si ottiene
+		\[
+		e_{\rho_0(a_0)}\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_1},
+		\]
+		e dopo il secondo
+		\[
+		e_{\rho_1(a_1)}\otimes e_{\rho_0(a_0)}
+		\otimes e_{a_{m-1}}\otimes\cdots\otimes e_{a_2}.
+		\]
+		Proseguendo per \(m\) stadi, ciascuna cifra viene esposta una volta
+		all'azione della permutazione corrispondente e i fattori ritornano
+		nell'ordine iniziale. Il risultato è
+		\[
+		e_{\rho_{m-1}(a_{m-1})}
+		\otimes\cdots\otimes
+		e_{\rho_0(a_0)},
+		\]
+		che coincide con l'azione di
+		\(P_{m-1}\otimes\cdots\otimes P_0\). I tensori elementari formano una base,
+		perciò i due operatori sono uguali.
+	\end{proof}
+	
+	La relazione \(\MSC_m^m=I\) non autorizza una cancellazione formale delle
+	rotazioni nella composizione, poiché fra due rotazioni successive compaiono
+	le trasformazioni locali. Il teorema descrive invece il trasporto di ogni
+	fattore fino al livello sul quale deve agire la raccolta e la successiva
+	chiusura dell'intero ciclo.
+	
+	\section{Permutazioni digitalmente separabili}
+	
+	Il codice locale
+	\[
+	\boldsymbol{\rho}
+	=
+	(\rho_{m-1},\dots,\rho_0)
+	\in S_b^m
+	\]
+	definisce la trasformazione globale
+	\[
+	\pi_{\boldsymbol{\rho}}
+	\bigl(\val(a_{m-1},\dots,a_0)\bigr)
+	=
+	\val\bigl(
+	\rho_{m-1}(a_{m-1}),\dots,\rho_0(a_0)
+	\bigr).
+	\]
+	La matrice di permutazione corrispondente, nella base ordinata dai tensori
+	\(e_\alpha\), è
+	\[
+	P_{\boldsymbol{\rho}}
+	=
+	P_{m-1}\otimes\cdots\otimes P_0.
+	\]
+	
+	Per ogni livello \(i\in\{0,\dots,m-1\}\), sia
+	\[
+	d_i\bigl(\val(a_{m-1},\dots,a_0)\bigr)=a_i
+	\]
+	la proiezione sulla cifra di livello \(i\). Per \(t\in\Db\) si definisce la
+	fibra digitale
+	\[
+	F_{i,t}
+	=
+	\{x\in\{0,\dots,b^m-1\}:d_i(x)=t\},
+	\]
+	e la partizione
+	\[
+	\mathcal F_i
+	=
+	\{F_{i,t}:t\in\Db\}.
+	\]
+	Ogni fibra ha cardinalità \(b^{m-1}\).
+	
+	\begin{definition}
+		Una permutazione \(\pi\in S_{b^m}\) è \emph{digitalmente separabile} se
+		esistono permutazioni \(\rho_0,\dots,\rho_{m-1}\in S_b\) tali che
+		\[
+		d_i(\pi(x))
+		=
+		\rho_i(d_i(x))
+		\]
+		per ogni posizione \(x\) e ogni livello \(i\).
+	\end{definition}
+	
+	La definizione può essere riconosciuta direttamente nell'azione di \(\pi\),
+	senza conoscere in anticipo il codice che l'ha prodotta.
+	
+	\begin{theorem}[Caratterizzazione intrinseca e fattorizzazione]
+		Per una permutazione \(\pi\in S_{b^m}\), le seguenti proprietà sono
+		equivalenti.
+		\begin{enumerate}
+			\item Esiste un codice unico
+			\[
+			\boldsymbol{\rho}
+			=(\rho_{m-1},\dots,\rho_0)\in S_b^m
+			\]
+			tale che \(\pi=\pi_{\boldsymbol{\rho}}\).
+			
+			\item Per ogni \(i\), la funzione \(d_i\circ\pi\) è costante su ciascuna
+			fibra \(F_{i,t}\).
+			
+			\item Per ogni \(i\), la permutazione \(\pi\) induce una permutazione dei
+			blocchi della partizione \(\mathcal F_i\).
+			
+			\item La matrice di permutazione di \(\pi\) ammette una fattorizzazione
+			\[
+			P_{m-1}\otimes\cdots\otimes P_0,
+			\]
+			dove ciascun \(P_i\) è una matrice di permutazione \(b\times b\).
+		\end{enumerate}
+		Le permutazioni \(\rho_i\) e le matrici \(P_i\) sono determinate in modo
+		unico.
+	\end{theorem}
+	
+	\begin{proof}
+		La prima proprietà implica la seconda perché, per
+		\(x=\val(a_{m-1},\dots,a_0)\), vale
+		\[
+		d_i(\pi(x))=\rho_i(a_i).
+		\]
+		Il membro destro dipende soltanto dal valore \(a_i=d_i(x)\), perciò è
+		costante su \(F_{i,t}\).
+		
+		Supposta la seconda proprietà, per ogni \(i\) e \(t\) si definisce
+		\[
+		\rho_i(t)
+		=
+		d_i(\pi(x)),
+		\qquad x\in F_{i,t}.
+		\]
+		La definizione non dipende dalla scelta di \(x\). Se due valori distinti
+		\(t,t'\) avessero la stessa immagine \(u\), l'iniettività di \(\pi\) dovrebbe
+		mandare i due insiemi disgiunti \(F_{i,t}\) e \(F_{i,t'}\), ciascuno di
+		cardinalità \(b^{m-1}\), dentro la sola fibra \(F_{i,u}\), che possiede la
+		stessa cardinalità di uno di essi. Ciò è impossibile. La funzione \(\rho_i\)
+		è quindi iniettiva e, poiché \(\Db\) è finito, appartiene a \(S_b\).
+		
+		Per ogni posizione \(x\), le cifre di \(\pi(x)\) sono allora
+		\[
+		\rho_{m-1}(d_{m-1}(x)),\dots,\rho_0(d_0(x)).
+		\]
+		Esse determinano un'unica posizione, e ne segue
+		\(\pi=\pi_{\boldsymbol{\rho}}\). La stessa costruzione mostra l'unicità di
+		ciascuna \(\rho_i\).
+		
+		La seconda e la terza proprietà sono equivalenti: la costanza di
+		\(d_i\circ\pi\) su \(F_{i,t}\) equivale all'inclusione dell'immagine della
+		fibra in una singola fibra finale; la biiettività di \(\pi\) e l'uguaglianza
+		delle cardinalità trasformano l'inclusione in uguaglianza.
+		
+		Infine, la prima proprietà implica la quarta per il teorema di chiusura
+		tensoriale. Viceversa, una matrice
+		\(P_{m-1}\otimes\cdots\otimes P_0\) agisce sui tensori di base trasformando
+		separatamente i rispettivi indici, e induce quindi
+		\(\pi_{\boldsymbol{\rho}}\). L'unicità delle permutazioni locali comporta
+		quella dei fattori matriciali all'interno della classe delle matrici di
+		permutazione.
+	\end{proof}
+	
+	\begin{corollary}
+		L'applicazione
+		\[
+		\Phi:S_b^m\longrightarrow S_{b^m},
+		\qquad
+		\boldsymbol{\rho}\longmapsto\pi_{\boldsymbol{\rho}},
+		\]
+		è un omomorfismo iniettivo. La sua immagine coincide con il gruppo delle
+		permutazioni digitalmente separabili ed è isomorfa a \(S_b^m\).
+	\end{corollary}
+	
+	\begin{proof}
+		La composizione di due codici avviene componente per componente, perciò
+		\[
+		\pi_{\boldsymbol{\rho}\boldsymbol{\sigma}}
+		=
+		\pi_{\boldsymbol{\rho}}\circ\pi_{\boldsymbol{\sigma}}.
+		\]
+		L'unicità del codice associato a una trasformazione rende il nucleo banale.
+		La descrizione dell'immagine segue dal teorema.
+	\end{proof}
+	
+	Nel caso \(b=m=3\), si ottiene
+	\[
+	S_3^3\hookrightarrow S_{27}.
+	\]
+	L'immagine contiene \(6^3=216\) permutazioni, una sottoclasse fortemente
+	vincolata dei \(27!\) elementi di \(S_{27}\).
+	
+	\section{Ricostruzione da statistiche aggregate sulle fibre}
+	
+	La caratterizzazione precedente ricostruisce le componenti locali leggendo le
+	cifre delle immagini. Un secondo problema riguarda la quantità di
+	informazione necessaria quando, al posto dell'intera permutazione, siano
+	disponibili dati aggregati sulle fibre digitali.
+	
+	Per una permutazione digitalmente separabile
+	\(\pi=\pi_{\boldsymbol{\rho}}\), si definisce
+	\[
+	\Sigma_{i,t}(\pi)
+	=
+	\sum_{x\in F_{i,t}}\pi(x).
+	\]
+	La somma raccoglie le immagini di tutte le posizioni che condividono la cifra
+	\(t\) al livello \(i\).
+	
+	\begin{theorem}[Formula delle statistiche di fibra]
+		Per ogni \(i\in\{0,\dots,m-1\}\) e \(t\in\Db\),
+		\[
+		\Sigma_{i,t}(\pi)
+		=
+		C_i+b^{m-1+i}\rho_i(t),
+		\]
+		dove
+		\[
+		C_i
+		=
+		b^{m-2}\frac{b(b-1)}2
+		\sum_{\substack{0\le j\le m-1\\j\ne i}}b^j.
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		Se \(x=\val(a_{m-1},\dots,a_0)\), allora
+		\[
+		\pi(x)
+		=
+		\sum_{j=0}^{m-1}b^j\rho_j(a_j).
+		\]
+		Sulla fibra \(F_{i,t}\), la cifra \(a_i\) è fissata. Il contributo del
+		livello \(i\) alla somma è quindi
+		\[
+		\sum_{x\in F_{i,t}}b^i\rho_i(t)
+		=
+		b^{m-1+i}\rho_i(t).
+		\]
+		Per ogni \(j\ne i\), la cifra \(a_j\) assume ciascun valore di \(\Db\)
+		esattamente \(b^{m-2}\) volte. Poiché \(\rho_j\) è una permutazione,
+		\[
+		\sum_{u=0}^{b-1}\rho_j(u)
+		=
+		\sum_{u=0}^{b-1}u
+		=
+		\frac{b(b-1)}2.
+		\]
+		Sommando i contributi dei livelli \(j\ne i\) si ottiene \(C_i\), che non
+		dipende da \(t\) né dalle permutazioni locali diverse da \(\rho_i\).
+	\end{proof}
+	
+	\begin{corollary}[Sufficienza delle statistiche aggregate]
+		All'interno del gruppo delle permutazioni digitalmente separabili, la
+		famiglia completa delle quantità \(\Sigma_{i,t}\) determina univocamente la
+		permutazione globale. Le componenti locali sono ricostruite mediante
+		\[
+		\rho_i(t)
+		=
+		\frac{\Sigma_{i,t}(\pi)-C_i}{b^{m-1+i}}.
+		\]
+		In particolare, la mappa
+		\[
+		\pi
+		\longmapsto
+		\bigl(\Sigma_{i,t}(\pi)\bigr)_{
+			0\le i\le m-1,\;t\in\Db}
+		\]
+		è iniettiva sulla classe digitalmente separabile.
+	\end{corollary}
+	
+	\begin{proof}
+		La formula ricostruisce tutti i valori di tutte le permutazioni
+		\(\rho_i\). Il teorema di caratterizzazione determina quindi
+		\(\pi=\pi_{\boldsymbol{\rho}}\) in modo unico.
+	\end{proof}
+	
+	\begin{remark}
+		Se l'intera permutazione \(\pi\) è conosciuta punto per punto, le componenti
+		\(\rho_i\) possono essere lette direttamente dalle cifre di immagini
+		opportunamente scelte. Le somme sulle fibre non costituiscono dunque l'unico
+		metodo di ricostruzione; mostrano piuttosto che un insieme di statistiche
+		aggregate conserva tutta l'informazione locale entro la classe separabile.
+		La sola compatibilità numerica delle somme con la formula non viene qui
+		assunta come criterio di riconoscimento per una permutazione arbitraria di
+		\(S_{b^m}\).
+	\end{remark}
+	
+	\section{Il caso delle ventisette carte}
+	
+	Per \(b=m=3\), le posizioni sono numerate da \(0\) a \(26\) e ogni posizione
+	ha la forma
+	\[
+	x=(a_2a_1a_0)_3.
+	\]
+	Le fibre digitali contengono nove posizioni. La formula generale diventa
+	\[
+	\Sigma_{i,t}(\pi)
+	=
+	C_i+3^{2+i}\rho_i(t),
+	\]
+	con
+	\[
+	C_0=108,
+	\qquad
+	C_1=90,
+	\qquad
+	C_2=36.
+	\]
+	I valori possibili sono
+	\[
+	\begin{array}{c@{\qquad}ccc}
+		\toprule
+		i & \rho_i(t)=0 & \rho_i(t)=1 & \rho_i(t)=2\\
+		\midrule
+		0 & 108 & 117 & 126\\
+		1 &  90 & 117 & 144\\
+		2 &  36 & 117 & 198\\
+		\bottomrule
+	\end{array}
+	\]
+	Le differenze consecutive sono \(9\), \(27\) e \(81\), in accordo con i
+	coefficienti \(3^{2+i}\). Il valore comune \(117\), ottenuto quando
+	\(\rho_i(t)=1\), deriva dalla compensazione fra \(C_i\) e il peso del livello;
+	non introduce una nuova simmetria gruppale.
+	
+	\begin{example}[Ricostruzione di un codice]
+		Si consideri il codice
+		\[
+		\boldsymbol{\rho}
+		=
+		(\rho_2,\rho_1,\rho_0),
+		\]
+		con
+		\[
+		\rho_0=(0\,1\,2),
+		\qquad
+		\rho_1=(0\,2),
+		\qquad
+		\rho_2=(0\,1),
+		\]
+		dove i cicli agiscono su \(\{0,1,2\}\). Le statistiche di fibra sono
+		\[
+		\begin{array}{c@{\qquad}ccc}
+			\toprule
+			i & \Sigma_{i,0} & \Sigma_{i,1} & \Sigma_{i,2}\\
+			\midrule
+			0 & 117 & 126 & 108\\
+			1 & 144 & 117 &  90\\
+			2 & 117 &  36 & 198\\
+			\bottomrule
+		\end{array}
+		\]
+		La formula di ricostruzione restituisce le terne dei valori
+		\[
+		\begin{aligned}
+			(\rho_0(0),\rho_0(1),\rho_0(2))
+			&=
+			\left(
+			\frac{117-108}{9},
+			\frac{126-108}{9},
+			\frac{108-108}{9}
+			\right)
+			=(1,2,0),\\
+			(\rho_1(0),\rho_1(1),\rho_1(2))
+			&=
+			\left(
+			\frac{144-90}{27},
+			\frac{117-90}{27},
+			\frac{90-90}{27}
+			\right)
+			=(2,1,0),\\
+			(\rho_2(0),\rho_2(1),\rho_2(2))
+			&=
+			\left(
+			\frac{117-36}{81},
+			\frac{36-36}{81},
+			\frac{198-36}{81}
+			\right)
+			=(1,0,2).
+		\end{aligned}
+		\]
+		Le tre permutazioni iniziali vengono quindi ricostruite integralmente dai
+		nove dati aggregati.
+	\end{example}
+	
+	Nel linguaggio del gioco, il codice di raccolta determina la procedura
+	ordinaria e la trasformazione globale; il tabellone ne rappresenta l'azione
+	sulle ventisette posizioni. Questa distinzione evita di identificare
+	l'esecuzione fisica con la permutazione finale pur conservando, nel modello
+	qui considerato, la corrispondenza biunivoca fra i due livelli.
+	
+	\section{Conseguenze strutturali}
+	
+	La fattorizzazione separata rende immediatamente leggibili alcuni invarianti
+	della trasformazione globale.
+	
+	\begin{proposition}
+		Per
+		\[
+		\boldsymbol{\rho}
+		=(\rho_{m-1},\dots,\rho_0)\in S_b^m
+		\]
+		valgono
+		\[
+		\ord(\pi_{\boldsymbol{\rho}})
+		=
+		\mcm\bigl(
+		\ord(\rho_{m-1}),\dots,\ord(\rho_0)
+		\bigr)
+		\]
+		e
+		\[
+		\fix(\pi_{\boldsymbol{\rho}})
+		=
+		\prod_{i=0}^{m-1}\fix(\rho_i).
+		\]
+	\end{proposition}
+	
+	\begin{proof}
+		La potenza \(\pi_{\boldsymbol{\rho}}^n\) è l'identità esattamente quando
+		\(\rho_i^n\) è l'identità per ogni \(i\); il minimo intero positivo con
+		questa proprietà è il minimo comune multiplo degli ordini locali. Una
+		posizione è fissa quando ciascuna delle sue cifre è fissata dalla
+		permutazione del livello corrispondente. Le scelte delle cifre sono
+		indipendenti, e le cardinalità si moltiplicano.
+	\end{proof}
+	
+	\begin{remark}
+		Le classi di coniugio del gruppo interno \(S_b^m\) sono scelte
+		indipendentemente nei fattori e sono quindi \(p(b)^m\), dove \(p(b)\) è il
+		numero delle partizioni di \(b\). Per \(b=m=3\) se ne ottengono \(3^3=27\).
+		Questa classificazione riguarda il gruppo digitalmente separabile; la
+		coniugazione nel gruppo ambiente \(S_{b^m}\) può identificare elementi che
+		restano distinti in \(S_b^m\).
+	\end{remark}
+	
+	\section{Discussione conclusiva}
+	
+	Il modello posizionale, la descrizione tensoriale e l'azione di gruppo
+	rappresentano tre livelli della stessa struttura. La procedura fisica estrae
+	ciclicamente le cifre dell'indirizzo; il codice locale assegna a ciascun
+	livello una permutazione; il ciclo completo produce una permutazione globale
+	che conserva tutte le partizioni digitali e possiede una fattorizzazione di
+	Kronecker unica. La catena può essere riassunta come
+	\[
+	\begin{aligned}
+		\text{procedura fisica}
+		&\longrightarrow
+		\text{codice locale}
+		\longrightarrow
+		\text{permutazione digitalmente separabile}
+		\\
+		&\longrightarrow
+		\text{fattorizzazione e ricostruzione}.
+	\end{aligned}
+	\]
+	
+	La caratterizzazione mediante le partizioni \(\mathcal F_i\) individua la
+	classe globale senza richiamare il gesto concreto del gioco. La formula delle
+	statistiche di fibra aggiunge un secondo livello informativo: entro questa
+	classe, somme aggregate delle immagini determinano tutti i fattori locali.
+	La ricostruzione non dipende quindi dalla conoscenza della storia fisica del
+	mazzo, ma dalla permanenza della separabilità digitale nella trasformazione
+	finale.
+	
+	Le ipotesi del modello delimitano con precisione il risultato. L'omogeneità
+	\(N=b^m\), la conservazione dell'ordine interno, l'assenza di rovesciamenti e
+	la scelta non adattiva delle raccolte rendono possibile l'azione componente
+	per componente. L'introduzione di controlli supplementari, dipendenze fra i
+	livelli o fattorizzazioni non omogenee conduce a gruppi e dinamiche differenti.
+	Il caso rettangolare discusso nell'appendice conserva la permutazione dei
+	fattori tensoriali, ma perde la chiusura ciclica di livelli tutti uguali; nel
+	gioco delle ventuno carte la determinazione della carta scelta emerge inoltre
+	da una contrazione dello spazio delle possibilità, distinta dalla
+	permutazione fisica del mazzo.
+	
+	Il caso \(27=3^3\) non è pertanto speciale soltanto per la sua cardinalità.
+	La compatibilità fra scrittura ternaria, rotazione ciclica dei fattori e
+	azione separata delle raccolte trasforma un procedimento ricreativo in una
+	famiglia rigidamente riconoscibile di permutazioni globali.
+	
+	\appendix
+	
+	\section{Il caso rettangolare 
+		\texorpdfstring{\(N=i\,j\)}{N=ij} e la dinamica informativa}
+	
+	La fattorizzazione \(N=b^m\) utilizza livelli omogenei. Nei procedimenti
+	rettangolari il numero delle carte assume invece la forma
+	\[
+	N=i\,j,
+	\]
+	con fattori che possono essere differenti. Se il mazzo viene distribuito
+	ciclicamente in \(i\) colonne di lunghezza \(j\), ogni posizione si scrive
+	\[
+	x=iq+r,
+	\qquad
+	0\le r<i,
+	\qquad
+	0\le q<j.
+	\]
+	Il resto \(r\) identifica la colonna e il quoziente \(q\) la quota al suo
+	interno. Alla posizione si associa
+	\[
+	e_q^{(j)}\otimes e_r^{(i)}
+	\in
+	\mathbb R^j\otimes\mathbb R^i.
+	\]
+	
+	Lo scambio fra quota e colonna è realizzato dalla matrice di commutazione
+	\[
+	K_{j,i}:
+	\mathbb R^j\otimes\mathbb R^i
+	\longrightarrow
+	\mathbb R^i\otimes\mathbb R^j,
+	\]
+	definita da
+	\[
+	K_{j,i}
+	\bigl(e_q^{(j)}\otimes e_r^{(i)}\bigr)
+	=
+	e_r^{(i)}\otimes e_q^{(j)}.
+	\]
+	Vale
+	\[
+	K_{j,i}^{-1}=K_{i,j}=K_{j,i}^{\mathsf T}.
+	\]
+	
+	Sia \(\tau\in S_i\) la permutazione che assegna alla colonna \(r\) la
+	posizione di blocco \(\tau(r)\), e sia \(P_\tau\) la sua matrice. Conservando
+	l'ordine interno delle colonne, il passaggio fisico è
+	\[
+	\pi_\tau(iq+r)
+	=
+	j\tau(r)+q
+	\]
+	e il corrispondente operatore è
+	\[
+	M_\tau
+	=
+	(P_\tau\otimes I_j)\circ K_{j,i}:
+	\mathbb R^j\otimes\mathbb R^i
+	\longrightarrow
+	\mathbb R^i\otimes\mathbb R^j.
+	\]
+	Dopo aver identificato i due prodotti tensoriali ordinati con
+	\(\mathbb R^{ij}\) mediante le rispettive basi linearizzate, \(M_\tau\) è
+	rappresentato da una matrice di permutazione \(ij\times ij\). La sua
+	invertibilità descrive la reversibilità del passaggio fisico.
+	
+	L'operatore \(K_{j,i}\) e la rotazione \(\MSC_m\) esprimono entrambi una
+	permutazione dei fattori. Nel caso \(b^m\), tuttavia, tutti i fattori hanno la
+	stessa dimensione e una rotazione di ordine \(m\) espone successivamente ogni
+	cifra della medesima base. Nel caso rettangolare, quota e colonna hanno in
+	generale dimensioni differenti; lo scambio è invertibile, ma non produce da
+	solo una chiusura digitale analoga.
+	
+	Nel gioco delle ventuno carte l'ordine di raccolta è inoltre adattivo. Dopo
+	ogni distribuzione il partecipante indica la colonna contenente la carta
+	scelta e quella colonna viene collocata al centro. Se, più in generale, la
+	colonna indicata viene collocata nella posizione di blocco
+	\(c\in\{0,\dots,i-1\}\), la posizione della sola carta scelta segue la mappa
+	\[
+	F_c(x)
+	=
+	jc+\left\lfloor\frac{x}{i}\right\rfloor.
+	\]
+	Questa non è una singola permutazione fisica del mazzo: per ogni posizione
+	ipotetica seleziona il ramo corrispondente alla colonna che verrebbe indicata,
+	e soddisfa
+	\[
+	F_c(iq)=F_c(iq+1)=\cdots=F_c(iq+i-1)=jc+q.
+	\]
+	La mappa è quindi molti-a-uno.
+	
+	Per il gioco classico delle ventuno carte,
+	\[
+	i=3,
+	\qquad
+	j=7,
+	\qquad
+	c=1,
+	\]
+	si ha
+	\[
+	F(x)=7+\left\lfloor\frac{x}{3}\right\rfloor.
+	\]
+	Partendo da
+	\[
+	X_0=\{0,1,\dots,20\},
+	\]
+	l'evoluzione degli insiemi di posizioni compatibili è
+	\[
+	X_1=\{7,8,\dots,13\},
+	\qquad
+	X_2=\{9,10,11\},
+	\qquad
+	X_3=\{10\},
+	\]
+	e quindi
+	\[
+	21\longmapsto7\longmapsto3\longmapsto1.
+	\]
+	La permutazione fisica del mazzo resta invertibile a ogni stadio; ciò che si
+	contrae è l'incertezza relativa alla carta scelta. Questa distinzione separa
+	la dinamica del mazzo dalla dinamica informativa e segna il confine naturale
+	della struttura digitalmente separabile sviluppata nel corpo dell'articolo.
+	
+	\begin{thebibliography}{9}
+		
+		\bibitem{bolker}
+		E.~D. Bolker,
+		\emph{Gergonne's Card Trick, Positional Notation, and Radix Sort},
+		Mathematics Magazine \textbf{83} (2010), no.~1, 46--49.
+		\href{https://doi.org/10.4169/002557010X479983}{doi:10.4169/002557010X479983}.
+		
+		\bibitem{champanerkar-jani}
+		J. Champanerkar and M. Jani,
+		\emph{Using a Card Trick to Illustrate Fixed Points and Stability},
+		PRIMUS \textbf{25} (2015), no.~5, 473--483.
+		\href{https://doi.org/10.1080/10511970.2015.1031308}{doi:10.1080/10511970.2015.1031308}.
+		
+		\bibitem{diaconis-graham-kantor}
+		P. Diaconis, R.~L. Graham and W.~M. Kantor,
+		\emph{The Mathematics of Perfect Shuffles},
+		Advances in Applied Mathematics \textbf{4} (1983), 175--196.
+		\href{https://doi.org/10.1016/0196-8858(83)90009-X}{doi:10.1016/0196-8858(83)90009-X}.
+		
+		\bibitem{henderson-searle}
+		H.~V. Henderson and S.~R. Searle,
+		\emph{The Vec-Permutation Matrix, the Vec Operator and Kronecker Products: A Review},
+		Linear and Multilinear Algebra \textbf{9} (1981), no.~4, 271--288.
+		\href{https://doi.org/10.1080/03081088108817379}{doi:10.1080/03081088108817379}.
+		
+		\bibitem{quintero}
+		R. Quintero,
+		\emph{On a Mathematical Model for an Old Card Trick},
+		Recreational Mathematics Magazine \textbf{4} (2017), no.~7, 65--77.
+		\href{https://doi.org/10.1515/rmm-2017-0014}{doi:10.1515/rmm-2017-0014}.
+		
+	\end{thebibliography}
+	
 \end{document}
