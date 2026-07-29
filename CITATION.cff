@@ -10,11 +10,21 @@ title: "27-card tensor structure"
 repository-code: "https://github.com/maberlanda/27-card-tensor-structure"
 url: "https://github.com/maberlanda/27-card-tensor-structure"
 
+keywords:
+  - "digitally separable permutations"
+  - "tensor products"
+  - "Kronecker products"
+  - "permutation groups"
+  - "card dealing"
+  - "digital fibers"
+  - "positional numeration"
+  - "mathematical recreation"
+
 preferred-citation:
   type: unpublished
   authors:
     - family-names: "Berlanda"
       given-names: "Maurizio"
-  title: "Una struttura tensoriale per il gioco delle ventisette carte: Prodotti di Kronecker, azioni di gruppo e fibre digitali"
+  title: "Permutazioni digitalmente separabili nei giochi di carte su b^m posizioni: Prodotti di Kronecker e ricostruzione da fibre digitali"
   year: 2026
   url: "https://github.com/maberlanda/27-card-tensor-structure"
