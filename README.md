@@ -35,8 +35,8 @@ The current paper is written in Italian:
 **Permutazioni digitalmente separabili nei giochi di carte su \$b^m\$
 posizioni — Prodotti di Kronecker e ricostruzione da fibre digitali**
 
-- [PDF version]$paper/Articolo.pdf$
-- [LaTeX source]$paper/Articolo.tex$
+- [PDF version](paper/Articolo.pdf)
+- [LaTeX source](paper/Articolo.tex)
 
 The paper is self-contained and focuses on the general mathematical
 structure. The 27-card trick is used as the principal concrete example.
