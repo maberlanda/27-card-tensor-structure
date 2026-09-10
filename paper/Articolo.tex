@@ -107,7 +107,7 @@
 	nascere dal procedimento, individuare la fattorizzazione locale nascosta nella
 	loro azione e stabilire quali informazioni aggregate siano sufficienti a
 	ricostruirla. La scrittura posizionale, il prodotto tensoriale e l'azione del
-	gruppo diretto \(S_b^m\) convergono così nello stesso problema.
+	prodotto diretto \(S_b^m\) convergono così nello stesso problema.
 	
 	Il ciclo fisico viene dapprima descritto mediante una rotazione dei fattori
 	tensoriali; dopo \(m\) stadi la rotazione si chiude e la matrice globale si
@@ -117,7 +117,10 @@
 	digitali delle posizioni. Le permutazioni locali sono allora determinate in
 	modo unico. Su questa classe, le somme delle immagini lungo le fibre digitali
 	costituiscono inoltre un insieme di statistiche aggregate sufficiente alla
-	ricostruzione completa del codice.
+	ricostruzione completa del codice. Qui si afferma la sufficienza di tale
+	famiglia, non la sua minimalità: per ciascun livello, una volta ricostruiti
+	\(b-1\) valori della permutazione locale, l'ultimo è determinato dai
+	precedenti.
 	
 	Il formalismo dei prodotti di Kronecker e delle matrici di commutazione è
 	standard; per le identità fondamentali si rinvia a Henderson e Searle
@@ -258,8 +261,17 @@
 	\MSC_m^m=I.
 	\]
 	
-	Sia \(P_h\) la matrice di permutazione associata a \(\rho_h\), secondo la
-	convenzione
+	Identifichiamo la base tensoriale con la base delle posizioni mediante
+
+	\[
+	 e_{a_{m-1}}\otimes\cdots\otimes e_{a_0}
+	 \longleftrightarrow
+	 e_{\val(a_{m-1},\dots,a_0)},
+	\]
+
+	ordinando quindi i vettori di base secondo il valore crescente di \(\val\). Con questa identificazione, la matrice tensoriale rappresenta direttamente l'azione sulle posizioni numerate da \(0\) a \(b^m-1\).
+
+	Sia \(P_h\) la matrice di permutazione associata a \(\rho_h\), secondo la convenzione
 	\[
 	P_he_r=e_{\rho_h(r)}.
 	\]
@@ -670,15 +682,17 @@
 	\end{example}
 	
 	Nel linguaggio del gioco, il codice di raccolta determina la procedura
-	ordinaria e la trasformazione globale; il tabellone ne rappresenta l'azione
-	sulle ventisette posizioni. Questa distinzione evita di identificare
+	ordinaria e la trasformazione globale; il tabellone, cioè la tabella che
+	riporta l'immagine di ciascuna posizione, ne rappresenta l'azione sulle
+	ventisette posizioni. Questa distinzione evita di identificare
 	l'esecuzione fisica con la permutazione finale pur conservando, nel modello
 	qui considerato, la corrispondenza biunivoca fra i due livelli.
 	
 	\section{Conseguenze strutturali}
 	
 	La fattorizzazione separata rende immediatamente leggibili alcuni invarianti
-	della trasformazione globale.
+	della trasformazione globale. Indichiamo con \(\fix(\sigma)\) il numero dei
+	punti fissi della permutazione \(\sigma\).
 	
 	\begin{proposition}
 		Per
@@ -712,9 +726,10 @@
 	\end{proof}
 	
 	\begin{remark}
-		Le classi di coniugio del gruppo interno \(S_b^m\) sono scelte
-		indipendentemente nei fattori e sono quindi \(p(b)^m\), dove \(p(b)\) è il
-		numero delle partizioni di \(b\). Per \(b=m=3\) se ne ottengono \(3^3=27\).
+		In \(S_b\) le classi di coniugio sono determinate dal tipo di ciclo e sono
+		quindi indicizzate dalle partizioni di \(b\). Le classi di coniugio del
+		gruppo interno \(S_b^m\) sono scelte indipendentemente nei fattori e sono
+		perciò \(p(b)^m\), dove \(p(b)\) è il numero delle partizioni di \(b\). Per \(b=m=3\) se ne ottengono \(3^3=27\).
 		Questa classificazione riguarda il gruppo digitalmente separabile; la
 		coniugazione nel gruppo ambiente \(S_{b^m}\) può identificare elementi che
 		restano distinti in \(S_b^m\).
@@ -726,8 +741,9 @@
 	rappresentano tre livelli della stessa struttura. La procedura fisica estrae
 	ciclicamente le cifre dell'indirizzo; il codice locale assegna a ciascun
 	livello una permutazione; il ciclo completo produce una permutazione globale
-	che conserva tutte le partizioni digitali e possiede una fattorizzazione di
-	Kronecker unica. La catena può essere riassunta come
+	che conserva tutte le partizioni digitali e possiede, nell'ordine fissato,
+	una fattorizzazione di Kronecker unica in fattori di permutazione
+	\(b\times b\). La catena può essere riassunta come
 	\[
 	\begin{aligned}
 		\text{procedura fisica}
@@ -755,8 +771,9 @@
 	per componente. L'introduzione di controlli supplementari, dipendenze fra i
 	livelli o fattorizzazioni non omogenee conduce a gruppi e dinamiche differenti.
 	Il caso rettangolare discusso nell'appendice conserva la permutazione dei
-	fattori tensoriali, ma perde la chiusura ciclica di livelli tutti uguali; nel
-	gioco delle ventuno carte la determinazione della carta scelta emerge inoltre
+	fattori tensoriali; per una fattorizzazione \(N=ij\) arbitraria, tuttavia, la
+	chiusura ciclica del modello omogeneo non segue dalla sola rappresentazione a
+	due fattori. Nel gioco delle ventuno carte la determinazione della carta scelta emerge inoltre
 	da una contrazione dello spazio delle possibilità, distinta dalla
 	permutazione fisica del mazzo.
 	
@@ -856,7 +873,8 @@
 	\[
 	F_c(iq)=F_c(iq+1)=\cdots=F_c(iq+i-1)=jc+q.
 	\]
-	La mappa è quindi molti-a-uno.
+	Per \(i\geq2\) la mappa è quindi molti-a-uno. Nel caso degenere \(i=1\),
+	invece, essa è biiettiva.
 	
 	Per il gioco classico delle ventuno carte,
 	\[
@@ -874,7 +892,9 @@
 	\[
 	X_0=\{0,1,\dots,20\},
 	\]
-	l'evoluzione degli insiemi di posizioni compatibili è
+	definiamo ricorsivamente \(X_{k+1}=F(X_k)\). Considerando in questo modo
+	l'insieme complessivo delle posizioni raggiungibili al variare delle possibili
+	storie di risposta, si ottiene
 	\[
 	X_1=\{7,8,\dots,13\},
 	\qquad
@@ -886,8 +906,11 @@
 	\[
 	21\longmapsto7\longmapsto3\longmapsto1.
 	\]
-	La permutazione fisica del mazzo resta invertibile a ogni stadio; ciò che si
-	contrae è l'incertezza relativa alla carta scelta. Questa distinzione separa
+	Questi insiemi non vanno confusi con quelli condizionati a una specifica
+	sequenza di risposte osservate, che possono essere più piccoli e si ottengono
+	intersecando a ogni stadio con la colonna effettivamente indicata prima di
+	applicare \(F\). La permutazione fisica del mazzo resta invertibile a ogni
+	stadio; ciò che si contrae è l'incertezza relativa alla carta scelta. Questa distinzione separa
 	la dinamica del mazzo dalla dinamica informativa e segna il confine naturale
 	della struttura digitalmente separabile sviluppata nel corpo dell'articolo.
 	
