@@ -37,17 +37,21 @@
 \date{}
 
 \begin{document}
-	
+
 	\maketitle
-	
+
 	\begin{abstract}
 		Si considera una famiglia di procedure su \(N=b^m\) posizioni, ottenute
 		ripetendo per \(m\) stadi la distribuzione ciclica in \(b\) mazzetti e la
-		loro raccolta secondo una permutazione assegnata. La scrittura in base \(b\)
+		loro raccolta secondo una permutazione assegnata. A ogni stadio può inoltre
+		intervenire il rovesciamento globale del mazzo. La scrittura in base \(b\)
 		identifica le posizioni con le parole di \(D_b^m\), dove
 		\(D_b=\{0,\dots,b-1\}\), e descrive il ciclo completo mediante un'azione
-		separata sulle cifre. La trasformazione globale possiede la fattorizzazione
-		matriciale
+		separata sulle cifre. Il rovesciamento globale è rappresentato da
+		\(J_b=R_b^{\otimes m}\), dove \(R_b\) realizza l'inversione
+		\(t\mapsto b-1-t\); esso commuta con la rotazione ciclica dei fattori e
+		viene assorbito nelle permutazioni locali effettive. La trasformazione
+		globale conserva quindi una fattorizzazione di Kronecker
 		\[
 		P_{\boldsymbol{\rho}}
 		=
@@ -57,17 +61,26 @@
 		ottenute: esse sono esattamente le permutazioni che preservano, per ogni
 		livello, la partizione delle posizioni determinata dal valore della cifra
 		corrispondente. La caratterizzazione fornisce l'unicità dei fattori locali e
-		realizza un'immersione \(S_b^m\hookrightarrow S_{b^m}\). Si introducono poi
-		statistiche aggregate sulle fibre digitali e si prova che, all'interno di
-		questa classe, esse determinano integralmente le permutazioni locali. Il caso
-		\(b=m=3\) viene sviluppato esplicitamente e collegato al gioco delle
-		ventisette carte. Un'appendice confronta infine la struttura omogenea
-		\(b^m\) con il caso rettangolare \(N=ij\) e con la contrazione informativa
-		del gioco delle ventuno carte.
+		realizza un'immersione \(S_b^m\hookrightarrow S_{b^m}\). I rovesciamenti non
+		ampliano questa classe: distinguendo la storia fisica, ogni trasformazione
+		globale possiede esattamente \(2^m\) realizzazioni mediante le possibili
+		storie di rovesciamento. Si considera inoltre la famiglia tensoriale estesa,
+		nella quale, a ogni stadio, sia le permutazioni locali sia i fattori di
+		rovesciamento possono variare indipendentemente sui diversi livelli. I
+		controlli confluiscono in blocchi effettivi appartenenti ancora a
+		\(S_b^m\); la famiglia estesa satura la stessa classe globale e ne
+		moltiplica uniformemente le rappresentazioni. Si introducono poi statistiche
+		aggregate sulle fibre
+		digitali e si prova che, all'interno della classe separabile, esse
+		determinano integralmente i fattori locali effettivi. Il caso \(b=m=3\)
+		viene sviluppato esplicitamente e collegato al gioco delle ventisette carte.
+		Un'appendice confronta infine la struttura omogenea \(b^m\) con il caso
+		rettangolare \(N=ij\) e con la contrazione informativa del gioco delle
+		ventuno carte.
 	\end{abstract}
-	
+
 	\section{Introduzione}
-	
+
 	Il gioco delle ventisette carte appartiene alla famiglia dei procedimenti
 	classici nei quali una distribuzione ripetuta traduce informazioni operative
 	in cifre di una scrittura posizionale. L'identità
@@ -80,7 +93,7 @@
 	posizione finale. Il legame con la notazione posizionale e con gli algoritmi
 	di ordinamento per cifre è classico nella letteratura sul trucco di Gergonne
 	\cite{bolker}.
-	
+
 	Il modello qui studiato isola una versione non adattiva del procedimento. Si
 	fissano interi
 	\[
@@ -91,46 +104,61 @@
 	e un mazzo di \(N=b^m\) carte. In ciascuno dei \(m\) stadi il mazzo viene
 	distribuito ciclicamente in \(b\) mazzetti, conservando l'ordine interno, e i
 	mazzetti vengono raccolti secondo una permutazione di \(S_b\) stabilita per
-	quello stadio. Non sono ammessi rovesciamenti del mazzo né scelte adattive
-	dipendenti dalla posizione di una carta. La successione delle permutazioni di
-	raccolta forma un codice locale
+	quello stadio. È inoltre ammesso, in ciascuno stadio, un rovesciamento globale
+	prefissato del mazzo. Restano escluse le scelte adattive dipendenti dalla
+	posizione di una carta. Nel sottocaso senza rovesciamenti, la successione delle
+	permutazioni di raccolta forma direttamente un codice locale
 	\[
 	\boldsymbol{\rho}
 	=
 	(\rho_{m-1},\dots,\rho_0)
-	\in S_b^m,
+	\in S_b^m.
 	\]
-	che determina una permutazione globale delle \(b^m\) posizioni.
-	
+	Con i rovesciamenti, la storia fisica comprende anche una parola binaria
+	\(\boldsymbol{\varepsilon}\in\{0,1\}^m\); il ciclo completo assorbe tali
+	rovesciamenti in un codice locale effettivo, ancora appartenente a
+	\(S_b^m\), che determina la permutazione globale delle \(b^m\) posizioni.
+
 	La domanda centrale non riguarda soltanto il calcolo di questa permutazione.
 	Occorre riconoscere, fra tutti gli elementi di \(S_{b^m}\), quelli che possono
 	nascere dal procedimento, individuare la fattorizzazione locale nascosta nella
 	loro azione e stabilire quali informazioni aggregate siano sufficienti a
 	ricostruirla. La scrittura posizionale, il prodotto tensoriale e l'azione del
 	prodotto diretto \(S_b^m\) convergono così nello stesso problema.
-	
+
 	Il ciclo fisico viene dapprima descritto mediante una rotazione dei fattori
 	tensoriali; dopo \(m\) stadi la rotazione si chiude e la matrice globale si
-	separa in un prodotto di Kronecker. Il risultato conduce a una
+	separa in un prodotto di Kronecker. Il rovesciamento globale, essendo a sua
+	volta un prodotto di Kronecker con fattori tutti uguali, commuta con tale
+	rotazione e non distrugge la separabilità digitale. Più in generale, fattori
+	di rovesciamento diversi sui diversi livelli non commutano necessariamente con
+	la rotazione, ma vengono da essa trasportati ciclicamente e restano
+	decomponibili; anche il modello tensoriale esteso si chiude quindi nella
+	medesima classe globale. Il risultato conduce a una
 	caratterizzazione intrinseca: una permutazione globale appartiene alla classe
 	considerata esattamente quando preserva, livello per livello, le partizioni
-	digitali delle posizioni. Le permutazioni locali sono allora determinate in
-	modo unico. Su questa classe, le somme delle immagini lungo le fibre digitali
-	costituiscono inoltre un insieme di statistiche aggregate sufficiente alla
-	ricostruzione completa del codice. Qui si afferma la sufficienza di tale
-	famiglia, non la sua minimalità: per ciascun livello, una volta ricostruiti
-	\(b-1\) valori della permutazione locale, l'ultimo è determinato dai
-	precedenti.
-	
+	digitali delle posizioni. Le permutazioni locali effettive sono allora
+	determinate in modo unico. Su questa classe, le somme delle immagini lungo le
+	fibre digitali costituiscono inoltre un insieme di statistiche aggregate
+	sufficiente alla ricostruzione completa del codice effettivo. Qui si afferma
+	la sufficienza di tale famiglia, non la sua minimalità: per ciascun livello,
+	una volta ricostruiti \(b-1\) valori della permutazione locale, l'ultimo è
+	determinato dai precedenti.
+
 	Il formalismo dei prodotti di Kronecker e delle matrici di commutazione è
 	standard; per le identità fondamentali si rinvia a Henderson e Searle
 	\cite{henderson-searle}. La teoria dei perfect shuffles offre un contesto più
 	ampio per lo studio algebrico delle permutazioni di mazzi \cite{diaconis-graham-kantor},
 	mentre analisi dinamiche di giochi di carte affini compaiono, fra gli altri,
 	in Champanerkar e Jani \cite{champanerkar-jani} e Quintero \cite{quintero}.
-	
+
 	\section{Modello posizionale e procedura ordinaria}
-	
+
+	Iniziamo dal sottocaso ordinario, nel quale non intervengono rovesciamenti.
+	Questa scelta serve a isolare la ricorrenza posizionale di base; la sezione
+	successiva mostrerà che il rovesciamento globale può essere aggiunto senza
+	uscire dalla classe delle trasformazioni digitalmente separabili.
+
 	Sia
 	\[
 	\Db=\{0,1,\dots,b-1\}.
@@ -158,7 +186,7 @@
 	\]
 	La funzione \(\val\) è una biiezione fra \(\Db^m\) e
 	\(\{0,\dots,b^m-1\}\).
-	
+
 	Durante un singolo stadio, la posizione
 	\[
 	x=bq+r,
@@ -179,7 +207,7 @@
 	\]
 	La cifra meno significativa viene così estratta dall'indirizzo e reinserita
 	come cifra più significativa, dopo l'azione della permutazione di raccolta.
-	
+
 	\begin{proposition}[Ricorrenza posizionale]
 		Siano \(\rho_0,\dots,\rho_{k-1}\in S_b\) le permutazioni usate nei primi
 		\(k\) stadi, con \(1\le k\le m\), e sia
@@ -207,7 +235,7 @@
 		\sum_{i=0}^{m-1}\rho_i(a_i)b^i.
 		\]
 	\end{proposition}
-	
+
 	\begin{proof}
 		Per \(k=1\) la formula coincide con la regola del singolo stadio. Se essa
 		vale per un certo \(k<m\), la cifra successivamente estratta dal termine
@@ -224,13 +252,13 @@
 		termine \(\lfloor x_0/b^m\rfloor\) è nullo e le cifre trasformate occupano i
 		livelli originari.
 	\end{proof}
-	
+
 	Nel caso \(b=m=3\), la formula descrive il ciclo completo del gioco delle
 	ventisette carte. Il suo significato tensoriale permette di distinguere con
 	precisione l'operatore di uno stadio dalla trasformazione finale.
-	
+
 	\section{Dinamica tensoriale del ciclo completo}
-	
+
 	Sia
 	\[
 	E_b=\mathbb R^b
@@ -260,7 +288,7 @@
 	\[
 	\MSC_m^m=I.
 	\]
-	
+
 	Identifichiamo la base tensoriale con la base delle posizioni mediante
 
 	\[
@@ -284,7 +312,7 @@
 	La rotazione porta la cifra da elaborare nel primo fattore; la raccolta
 	applica poi \(P_h\) a quel fattore. La separazione delle azioni locali emerge
 	soltanto dopo il ciclo completo.
-	
+
 	\begin{theorem}[Chiusura tensoriale del ciclo]
 		Con le convenzioni precedenti,
 		\[
@@ -293,7 +321,7 @@
 		P_{m-1}\otimes P_{m-2}\otimes\cdots\otimes P_0.
 		\]
 	\end{theorem}
-	
+
 	\begin{proof}
 		Applicando successivamente gli operatori a
 		\[
@@ -320,16 +348,300 @@
 		\(P_{m-1}\otimes\cdots\otimes P_0\). I tensori elementari formano una base,
 		perciò i due operatori sono uguali.
 	\end{proof}
-	
+
 	La relazione \(\MSC_m^m=I\) non autorizza una cancellazione formale delle
 	rotazioni nella composizione, poiché fra due rotazioni successive compaiono
 	le trasformazioni locali. Il teorema descrive invece il trasporto di ogni
 	fattore fino al livello sul quale deve agire la raccolta e la successiva
 	chiusura dell'intero ciclo.
-	
+
+	\section{Rovesciamenti, trasporto e blocchi effettivi}
+
+	Il sottocaso precedente può essere esteso ammettendo, in ciascuno stadio,
+	un rovesciamento globale del mazzo. Sul singolo livello digitale definiamo
+	la permutazione
+	\[
+	r_b(t)=b-1-t,
+	\qquad t\in\Db,
+	\]
+	e indichiamo con \(R_b\) la corrispondente matrice di permutazione,
+	\[
+	R_be_t=e_{b-1-t}.
+	\]
+	Vale \(R_b^2=I_b\). Il rovesciamento globale delle \(b^m\) posizioni è la
+	permutazione
+	\[
+	j_b(x)=b^m-1-x.
+	\]
+	Se
+	\[
+	x=(a_{m-1}\cdots a_0)_b,
+	\]
+	allora
+	\[
+	j_b(x)=\bigl((b-1-a_{m-1})\cdots(b-1-a_0)\bigr)_b.
+	\]
+	Nella base tensoriale il corrispondente operatore è pertanto
+	\[
+	J_b=R_b^{\otimes m},
+	\qquad
+	J_b^{\varepsilon}=(R_b^{\varepsilon})^{\otimes m},
+	\qquad
+	\varepsilon\in\{0,1\}.
+	\]
+
+	Per un operatore decomponibile
+	\[
+	A=A_{m-1}\otimes\cdots\otimes A_0
+	\]
+	poniamo
+	\[
+	\vartheta(A)=A_0\otimes A_{m-1}\otimes\cdots\otimes A_1.
+	\]
+	Dalla definizione di \(\MSC_m\) segue l'identità di trasporto
+	\[
+	\MSC_m\circ A=\vartheta(A)\circ\MSC_m.
+	\]
+	In particolare, poiché tutti i fattori di \(J_b^{\varepsilon}\) coincidono,
+	\[
+	\vartheta(J_b^{\varepsilon})=J_b^{\varepsilon},
+	\]
+	e quindi
+	\[
+	\MSC_m\circ J_b^{\varepsilon}=J_b^{\varepsilon}\circ\MSC_m.
+	\]
+	Il rovesciamento globale non introduce dunque un accoppiamento fra le cifre:
+	è esso stesso digitalmente separabile ed è compatibile con la rotazione
+	ciclica dei fattori.
+
+	Il caso nel quale tutti i fattori di \(J_b^\varepsilon\) coincidono è il
+	\emph{rovesciamento fisico globale}. La commutazione appena osservata spiega
+	perché questo gesto non esca dalla struttura digitalmente separabile. Per
+	allineare però il modello con la costruzione generale usata nel volume,
+	conviene non introdurre qui una seconda teoria specifica del caso diagonale:
+	si passa direttamente ai blocchi locali indipendenti, dei quali il Jester
+	globale sarà poi una specializzazione vincolata.
+
+	\subsection{Dai controlli al blocco effettivo}
+
+	Il rovesciamento fisico globale costituisce una scelta diagonale: nello stesso
+	stadio tutti i fattori tensoriali sono sottoposti alla medesima inversione e
+	la raccolta agisce soltanto sul fattore esposto dalla distribuzione. La
+	struttura di trasporto consente però di considerare, come nel modello esteso
+	del caso ternario, una famiglia più ampia nella quale i controlli locali dei
+	diversi livelli sono indipendenti.
+
+	Poniamo
+	\[
+	\mathcal H_{b,m}
+	=
+	\left\{
+	Q_{m-1}\otimes\cdots\otimes Q_0:
+	Q_i\in S_b
+	\right\}
+	\cong S_b^m,
+	\]
+	così che
+	\[
+	|\mathcal H_{b,m}|=(b!)^m.
+	\]
+	Allo stadio \(h\) scegliamo indipendentemente le permutazioni locali
+	\[
+	\mathcal P_h
+	=
+	P_{m-1,h}\otimes\cdots\otimes P_{0,h},
+	\qquad
+	P_{i,h}\in S_b,
+	\]
+	e una parola binaria
+	\[
+	\boldsymbol{\varepsilon}_h
+	=
+	(\varepsilon_{m-1,h},\dots,\varepsilon_{0,h})
+	\in\{0,1\}^m,
+	\]
+	alla quale corrisponde
+	\[
+	J_h
+	=
+	R_b^{\varepsilon_{m-1,h}}\otimes\cdots\otimes
+	R_b^{\varepsilon_{0,h}}.
+	\]
+	Il sottocaso fisico globale si ottiene imponendo, per ogni stadio,
+	\(P_{m-2,h}=\cdots=P_{0,h}=I_b\) e
+	\(\varepsilon_{m-1,h}=\cdots=\varepsilon_{0,h}\).
+
+	Lo stadio esteso mantiene la stessa architettura
+	\[
+	\widehat T_h
+	=
+	\mathcal P_h\circ\MSC_m\circ J_h.
+	\]
+	Poiché in generale i fattori di \(J_h\) non coincidono, \(J_h\) non commuta
+	con \(\MSC_m\). L'identità di trasporto dà invece
+	\[
+	\MSC_m\circ J_h
+	=
+	\vartheta(J_h)\circ\MSC_m,
+	\]
+	con
+	\[
+	\vartheta(J_h)
+	=
+	R_b^{\varepsilon_{0,h}}
+	\otimes R_b^{\varepsilon_{m-1,h}}
+	\otimes\cdots\otimes R_b^{\varepsilon_{1,h}}.
+	\]
+	I sei controlli del caso ternario, e più in generale i \(2m\) controlli
+	locali dello stadio, confluiscono così nel solo blocco effettivo
+	\[
+	A_h
+	=
+	\mathcal P_h\circ\vartheta(J_h)\in\mathcal H_{b,m},
+	\]
+	per cui
+	\[
+	\widehat T_h=A_h\circ\MSC_m.
+	\]
+	Esplicitamente,
+	\[
+	\begin{aligned}
+	A_h
+	={}&
+	(P_{m-1,h}\circ R_b^{\varepsilon_{0,h}})
+	\otimes
+	(P_{m-2,h}\circ R_b^{\varepsilon_{m-1,h}})
+	\otimes\cdots\\
+	&\otimes
+	(P_{0,h}\circ R_b^{\varepsilon_{1,h}}).
+	\end{aligned}
+	\]
+	Gli indici incrociati sono precisamente l'effetto della rotazione
+	\(\vartheta\): ciascun fattore di rovesciamento incontra la permutazione
+	locale del livello sul quale viene trasportato.
+
+	\begin{proposition}[Saturazione uniforme del blocco effettivo]
+		Fissata una parola
+		\(\boldsymbol{\varepsilon}_h\in\{0,1\}^m\), al variare indipendente di
+		\(P_{m-1,h},\dots,P_{0,h}\in S_b\) il blocco \(A_h\) percorre una volta
+		ciascun elemento di \(\mathcal H_{b,m}\). Al variare anche della parola
+		binaria, ogni elemento di \(\mathcal H_{b,m}\) possiede esattamente
+		\(2^m\) rappresentazioni mediante i controlli dello stadio.
+	\end{proposition}
+
+	\begin{proof}
+		Per ogni esponente fissato \(\varepsilon\in\{0,1\}\), la composizione
+		\[
+		P\longmapsto P\circ R_b^{\varepsilon}
+		\]
+		è una biiezione di \(S_b\) in sé. Fissata
+		\(\boldsymbol{\varepsilon}_h\), i \(m\) fattori di \(A_h\) percorrono
+		quindi indipendentemente tutto \(S_b\), e il loro prodotto di Kronecker
+		percorre una sola volta \(\mathcal H_{b,m}\). Le parole binarie possibili
+		sono \(2^m\); per ciascuna di esse le permutazioni locali sono determinate
+		univocamente dal blocco effettivo assegnato.
+	\end{proof}
+
+	La concentrazione dell'informazione è già visibile nel singolo stadio: i
+	controlli locali distinguono \(2^m|\mathcal H_{b,m}|\) configurazioni, ma il
+	blocco effettivo conserva soltanto uno dei \(|\mathcal H_{b,m}|\) effetti
+	possibili. Resta da seguire tali blocchi lungo il ciclo completo.
+
+	\begin{theorem}[Saturazione del ciclo esteso]
+		Se in ciascuno dei \(m\) stadi il blocco effettivo \(A_h\) percorre
+		liberamente \(\mathcal H_{b,m}\), allora
+		\[
+		\left\{
+		A_{m-1}\circ\vartheta(A_{m-2})\circ\cdots\circ
+		\vartheta^{m-1}(A_0):
+		A_0,\dots,A_{m-1}\in\mathcal H_{b,m}
+		\right\}
+		=
+		\mathcal H_{b,m}.
+		\]
+		La famiglia tensoriale estesa produce quindi esattamente le stesse
+		permutazioni digitalmente separabili.
+	\end{theorem}
+
+	\begin{proof}
+		Dalla forma \(\widehat T_h=A_h\circ\MSC_m\) e dall'identità di trasporto,
+		\[
+		\widehat T_{m-1}\circ\cdots\circ\widehat T_0
+		=
+		A_{m-1}\circ\vartheta(A_{m-2})\circ\cdots\circ
+		\vartheta^{m-1}(A_0),
+		\]
+		poiché \(\MSC_m^m=I\). L'automorfismo \(\vartheta\) preserva
+		\(\mathcal H_{b,m}\), che è un gruppo; ogni trasformazione prodotta
+		appartiene dunque a \(\mathcal H_{b,m}\). Viceversa, assegnato
+		\(K\in\mathcal H_{b,m}\), sono ammesse le scelte
+		\(A_{m-1}=K\) e \(A_0=\cdots=A_{m-2}=I\), che producono precisamente
+		\(K\).
+	\end{proof}
+
+	La saturazione descrive l'insieme delle destinazioni, non il numero dei
+	percorsi che conducono a ciascuna di esse. Anche questo secondo conteggio è
+	uniforme.
+
+	\begin{theorem}[Uniformità delle decomposizioni estese]
+		Ogni trasformazione \(T\in\mathcal H_{b,m}\) possiede esattamente
+		\[
+		|\mathcal H_{b,m}|^{m-1}
+		=
+		(b!)^{m(m-1)}
+		\]
+		decomposizioni della forma
+		\[
+		T
+		=
+		A_{m-1}\circ\vartheta(A_{m-2})\circ\cdots\circ
+		\vartheta^{m-1}(A_0),
+		\qquad
+		A_h\in\mathcal H_{b,m}.
+		\]
+		Poiché ciascun blocco effettivo possiede \(2^m\) rappresentazioni locali,
+		ogni trasformazione finale possiede nella famiglia estesa esattamente
+		\[
+		|\mathcal H_{b,m}|^{m-1}2^{m^2}
+		\]
+		storie complete dei controlli.
+	\end{theorem}
+
+	\begin{proof}
+		Fissato \(T\), i primi \(m-1\) blocchi
+		\(A_0,\dots,A_{m-2}\) possono essere scelti liberamente. Una volta
+		assegnati, l'ultimo è determinato univocamente da
+		\[
+		A_{m-1}
+		=
+		T\circ
+		\left(
+		\vartheta(A_{m-2})\circ\cdots\circ\vartheta^{m-1}(A_0)
+		\right)^{-1}.
+		\]
+		Le decomposizioni sono pertanto \(|\mathcal H_{b,m}|^{m-1}\). Per ogni
+		terna, e più in generale per ogni \(m\)-upla, di blocchi effettivi, le
+		rappresentazioni dei singoli stadi sono indipendenti e forniscono il fattore
+		\((2^m)^m=2^{m^2}\).
+	\end{proof}
+
+	\begin{remark}
+		Il rovesciamento globale e la famiglia estesa producono lo stesso insieme
+		finale, ma la loro ridondanza nasce a livelli differenti. Nel modello fisico
+		globale la molteplicità \(2^m\) compare soltanto dopo l'intero ciclo: fissata
+		la trasformazione finale e la storia dei rovesciamenti, le raccolte sono
+		determinate. Nella famiglia estesa, invece, ogni singolo blocco effettivo ha
+		già \(2^m\) rappresentazioni locali; a questa prima concentrazione si aggiunge
+		la molteplicità delle decomposizioni del ciclo completo.
+	\end{remark}
+
 	\section{Permutazioni digitalmente separabili}
-	
-	Il codice locale
+
+	D'ora in poi \(\boldsymbol{\rho}\) denota un \emph{codice locale effettivo}
+	della trasformazione completa. Nel sottocaso ordinario coincide con la
+	successione delle raccolte. Nella famiglia estesa è invece il codice del
+	prodotto finale ottenuto dalla composizione dei blocchi effettivi
+	\(A_h\), dopo il loro trasporto mediante \(\vartheta\). In entrambi i casi
 	\[
 	\boldsymbol{\rho}
 	=
@@ -352,7 +664,7 @@
 	=
 	P_{m-1}\otimes\cdots\otimes P_0.
 	\]
-	
+
 	Per ogni livello \(i\in\{0,\dots,m-1\}\), sia
 	\[
 	d_i\bigl(\val(a_{m-1},\dots,a_0)\bigr)=a_i
@@ -371,7 +683,7 @@
 	\{F_{i,t}:t\in\Db\}.
 	\]
 	Ogni fibra ha cardinalità \(b^{m-1}\).
-	
+
 	\begin{definition}
 		Una permutazione \(\pi\in S_{b^m}\) è \emph{digitalmente separabile} se
 		esistono permutazioni \(\rho_0,\dots,\rho_{m-1}\in S_b\) tali che
@@ -382,10 +694,10 @@
 		\]
 		per ogni posizione \(x\) e ogni livello \(i\).
 	\end{definition}
-	
+
 	La definizione può essere riconosciuta direttamente nell'azione di \(\pi\),
 	senza conoscere in anticipo il codice che l'ha prodotta.
-	
+
 	\begin{theorem}[Caratterizzazione intrinseca e fattorizzazione]
 		Per una permutazione \(\pi\in S_{b^m}\), le seguenti proprietà sono
 		equivalenti.
@@ -396,13 +708,13 @@
 			=(\rho_{m-1},\dots,\rho_0)\in S_b^m
 			\]
 			tale che \(\pi=\pi_{\boldsymbol{\rho}}\).
-			
+
 			\item Per ogni \(i\), la funzione \(d_i\circ\pi\) è costante su ciascuna
 			fibra \(F_{i,t}\).
-			
+
 			\item Per ogni \(i\), la permutazione \(\pi\) induce una permutazione dei
 			blocchi della partizione \(\mathcal F_i\).
-			
+
 			\item La matrice di permutazione di \(\pi\) ammette una fattorizzazione
 			\[
 			P_{m-1}\otimes\cdots\otimes P_0,
@@ -412,7 +724,7 @@
 		Le permutazioni \(\rho_i\) e le matrici \(P_i\) sono determinate in modo
 		unico.
 	\end{theorem}
-	
+
 	\begin{proof}
 		La prima proprietà implica la seconda perché, per
 		\(x=\val(a_{m-1},\dots,a_0)\), vale
@@ -421,7 +733,7 @@
 		\]
 		Il membro destro dipende soltanto dal valore \(a_i=d_i(x)\), perciò è
 		costante su \(F_{i,t}\).
-		
+
 		Supposta la seconda proprietà, per ogni \(i\) e \(t\) si definisce
 		\[
 		\rho_i(t)
@@ -435,7 +747,7 @@
 		cardinalità \(b^{m-1}\), dentro la sola fibra \(F_{i,u}\), che possiede la
 		stessa cardinalità di uno di essi. Ciò è impossibile. La funzione \(\rho_i\)
 		è quindi iniettiva e, poiché \(\Db\) è finito, appartiene a \(S_b\).
-		
+
 		Per ogni posizione \(x\), le cifre di \(\pi(x)\) sono allora
 		\[
 		\rho_{m-1}(d_{m-1}(x)),\dots,\rho_0(d_0(x)).
@@ -443,12 +755,12 @@
 		Esse determinano un'unica posizione, e ne segue
 		\(\pi=\pi_{\boldsymbol{\rho}}\). La stessa costruzione mostra l'unicità di
 		ciascuna \(\rho_i\).
-		
+
 		La seconda e la terza proprietà sono equivalenti: la costanza di
 		\(d_i\circ\pi\) su \(F_{i,t}\) equivale all'inclusione dell'immagine della
 		fibra in una singola fibra finale; la biiettività di \(\pi\) e l'uguaglianza
 		delle cardinalità trasformano l'inclusione in uguaglianza.
-		
+
 		Infine, la prima proprietà implica la quarta per il teorema di chiusura
 		tensoriale. Viceversa, una matrice
 		\(P_{m-1}\otimes\cdots\otimes P_0\) agisce sui tensori di base trasformando
@@ -457,7 +769,7 @@
 		quella dei fattori matriciali all'interno della classe delle matrici di
 		permutazione.
 	\end{proof}
-	
+
 	\begin{corollary}
 		L'applicazione
 		\[
@@ -468,7 +780,7 @@
 		è un omomorfismo iniettivo. La sua immagine coincide con il gruppo delle
 		permutazioni digitalmente separabili ed è isomorfa a \(S_b^m\).
 	\end{corollary}
-	
+
 	\begin{proof}
 		La composizione di due codici avviene componente per componente, perciò
 		\[
@@ -479,21 +791,21 @@
 		L'unicità del codice associato a una trasformazione rende il nucleo banale.
 		La descrizione dell'immagine segue dal teorema.
 	\end{proof}
-	
+
 	Nel caso \(b=m=3\), si ottiene
 	\[
 	S_3^3\hookrightarrow S_{27}.
 	\]
 	L'immagine contiene \(6^3=216\) permutazioni, una sottoclasse fortemente
 	vincolata dei \(27!\) elementi di \(S_{27}\).
-	
+
 	\section{Ricostruzione da statistiche aggregate sulle fibre}
-	
+
 	La caratterizzazione precedente ricostruisce le componenti locali leggendo le
 	cifre delle immagini. Un secondo problema riguarda la quantità di
 	informazione necessaria quando, al posto dell'intera permutazione, siano
 	disponibili dati aggregati sulle fibre digitali.
-	
+
 	Per una permutazione digitalmente separabile
 	\(\pi=\pi_{\boldsymbol{\rho}}\), si definisce
 	\[
@@ -503,7 +815,7 @@
 	\]
 	La somma raccoglie le immagini di tutte le posizioni che condividono la cifra
 	\(t\) al livello \(i\).
-	
+
 	\begin{theorem}[Formula delle statistiche di fibra]
 		Per ogni \(i\in\{0,\dots,m-1\}\) e \(t\in\Db\),
 		\[
@@ -519,7 +831,7 @@
 		\sum_{\substack{0\le j\le m-1\\j\ne i}}b^j.
 		\]
 	\end{theorem}
-	
+
 	\begin{proof}
 		Se \(x=\val(a_{m-1},\dots,a_0)\), allora
 		\[
@@ -546,7 +858,7 @@
 		Sommando i contributi dei livelli \(j\ne i\) si ottiene \(C_i\), che non
 		dipende da \(t\) né dalle permutazioni locali diverse da \(\rho_i\).
 	\end{proof}
-	
+
 	\begin{corollary}[Sufficienza delle statistiche aggregate]
 		All'interno del gruppo delle permutazioni digitalmente separabili, la
 		famiglia completa delle quantità \(\Sigma_{i,t}\) determina univocamente la
@@ -565,13 +877,43 @@
 		\]
 		è iniettiva sulla classe digitalmente separabile.
 	\end{corollary}
-	
+
 	\begin{proof}
 		La formula ricostruisce tutti i valori di tutte le permutazioni
 		\(\rho_i\). Il teorema di caratterizzazione determina quindi
 		\(\pi=\pi_{\boldsymbol{\rho}}\) in modo unico.
 	\end{proof}
-	
+
+	\begin{corollary}[Ricostruzione e perdita della storia dei controlli]
+		Le statistiche di fibra ricostruiscono univocamente il codice locale
+		effettivo \(\boldsymbol{\rho}\), e quindi la trasformazione finale
+		\(\pi_{\boldsymbol{\rho}}\), anche quando essa proviene dalla famiglia
+		estesa con permutazioni locali e rovesciamenti indipendenti.
+
+		Esse non ricostruiscono invece, dalla sola trasformazione finale, né i
+		blocchi effettivi \(A_0,\dots,A_{m-1}\) attraversati durante il ciclo né
+		i controlli locali che hanno prodotto ciascun blocco. Ogni trasformazione
+		finale possiede infatti
+		\[
+		|\mathcal H_{b,m}|^{m-1}
+		\]
+		decomposizioni nei blocchi effettivi e ciascuna decomposizione possiede
+		\[
+		2^{m^2}
+		\]
+		storie complete dei controlli nella famiglia estesa.
+	\end{corollary}
+
+	\begin{proof}
+		La formula delle statistiche di fibra determina tutte le componenti
+		\(\rho_i\), quindi determina univocamente la trasformazione globale.
+		L'uniformità delle decomposizioni estese mostra invece che la stessa
+		trasformazione ammette \(|\mathcal H_{b,m}|^{m-1}\) \(m\)-uple di
+		blocchi effettivi. Per ciascuna di esse, la saturazione uniforme del
+		singolo blocco fornisce \(2^m\) rappresentazioni locali per stadio,
+		e dunque \(2^{m^2}\) storie complete dei controlli.
+	\end{proof}
+
 	\begin{remark}
 		Se l'intera permutazione \(\pi\) è conosciuta punto per punto, le componenti
 		\(\rho_i\) possono essere lette direttamente dalle cifre di immagini
@@ -582,9 +924,9 @@
 		assunta come criterio di riconoscimento per una permutazione arbitraria di
 		\(S_{b^m}\).
 	\end{remark}
-	
+
 	\section{Il caso delle ventisette carte}
-	
+
 	Per \(b=m=3\), le posizioni sono numerate da \(0\) a \(26\) e ogni posizione
 	ha la forma
 	\[
@@ -620,7 +962,7 @@
 	coefficienti \(3^{2+i}\). Il valore comune \(117\), ottenuto quando
 	\(\rho_i(t)=1\), deriva dalla compensazione fra \(C_i\) e il peso del livello;
 	non introduce una nuova simmetria gruppale.
-	
+
 	\begin{example}[Ricostruzione di un codice]
 		Si consideri il codice
 		\[
@@ -677,23 +1019,81 @@
 			=(1,0,2).
 		\end{aligned}
 		\]
-		Le tre permutazioni iniziali vengono quindi ricostruite integralmente dai
-		nove dati aggregati.
+		Le tre permutazioni locali effettive vengono quindi ricostruite
+		integralmente dai nove dati aggregati.
 	\end{example}
-	
-	Nel linguaggio del gioco, il codice di raccolta determina la procedura
-	ordinaria e la trasformazione globale; il tabellone, cioè la tabella che
-	riporta l'immagine di ciascuna posizione, ne rappresenta l'azione sulle
-	ventisette posizioni. Questa distinzione evita di identificare
-	l'esecuzione fisica con la permutazione finale pur conservando, nel modello
-	qui considerato, la corrispondenza biunivoca fra i due livelli.
-	
+
+	Nel caso \(b=m=3\), ponendo
+	\[
+	R=
+	\begin{pmatrix}
+	0&0&1\\
+	0&1&0\\
+	1&0&0
+	\end{pmatrix},
+	\]
+	il Jester ordinario è il sottocaso diagonale
+	\[
+	J_i
+	=
+	R^{\varepsilon_i}\otimes
+	R^{\varepsilon_i}\otimes
+	R^{\varepsilon_i}.
+	\]
+	Con le regole ordinarie del Gioco, a ogni stadio si sceglie una sola
+	raccolta fra le sei possibili e una sola scelta binaria del Jester. Le
+	procedure complete sono quindi
+	\[
+	(6\cdot2)^3=1728,
+	\]
+	mentre le trasformazioni globali distinte restano
+	\[
+	6^3=216.
+	\]
+	Come nel volume, le otto procedure associate a una stessa Cronaca emergono
+	soltanto dopo il ciclo completo: il fattore \(8=2^3\) appartiene alla storia
+	globale del procedimento e non a una molteplicità locale del singolo stadio.
+
+	Nella famiglia tensoriale estesa del libro la libertà è maggiore: in ciascuno
+	stadio si scelgono indipendentemente tre permutazioni locali e tre fattori
+	binari di rovesciamento. Le configurazioni locali sono quindi
+	\[
+	6^3 2^3=1728,
+	\]
+	ma confluiscono uniformemente nei \(216\) blocchi effettivi
+	\(A_i\in S_3^3\), otto rappresentazioni per ciascun blocco. Ripetendo questa
+	libertà nei tre stadi si ottengono
+	\[
+	1728^3=5\,159\,780\,352
+	\]
+	storie complete dei controlli. Il ciclo resta saturo sulle stesse \(216\)
+	Cronache. Ogni Cronaca possiede \(216^2=46\,656\) decomposizioni nei tre
+	blocchi effettivi e ciascuna decomposizione possiede \(8^3=512\)
+	rappresentazioni locali; pertanto le storie complete che conducono a una
+	Cronaca fissata sono
+	\[
+	216^2\,8^3=23\,887\,872.
+	\]
+	Questo meccanismo non va confuso con l'otto-a-uno del Jester globale: nel
+	Gioco ordinario l'otto compare soltanto al termine dell'intero ciclo, mentre
+	nella famiglia estesa compare già in ciascun blocco effettivo.
+
+	Nel linguaggio del gioco, il tabellone, cioè la tabella che riporta
+	l'immagine di ciascuna posizione, rappresenta la trasformazione globale sulle
+	ventisette posizioni. Nel sottocaso ordinario senza rovesciamenti, il codice
+	di raccolta e il codice locale effettivo coincidono e la corrispondenza con il
+	tabellone è biunivoca. Quando si registra anche il Jester, la stessa
+	trasformazione finale ammette invece otto storie fisiche: le statistiche di
+	fibra ricostruiscono il tabellone e i fattori effettivi, non la particolare
+	storia di rovesciamenti che li ha prodotti. Se tale storia è nota, le raccolte
+	fisiche si ricostruiscono univocamente dalle formule inverse.
+
 	\section{Conseguenze strutturali}
-	
+
 	La fattorizzazione separata rende immediatamente leggibili alcuni invarianti
 	della trasformazione globale. Indichiamo con \(\fix(\sigma)\) il numero dei
 	punti fissi della permutazione \(\sigma\).
-	
+
 	\begin{proposition}
 		Per
 		\[
@@ -715,7 +1115,7 @@
 		\prod_{i=0}^{m-1}\fix(\rho_i).
 		\]
 	\end{proposition}
-	
+
 	\begin{proof}
 		La potenza \(\pi_{\boldsymbol{\rho}}^n\) è l'identità esattamente quando
 		\(\rho_i^n\) è l'identità per ogni \(i\); il minimo intero positivo con
@@ -724,7 +1124,13 @@
 		permutazione del livello corrispondente. Le scelte delle cifre sono
 		indipendenti, e le cardinalità si moltiplicano.
 	\end{proof}
-	
+
+	Gli invarianti della proposizione dipendono quindi soltanto dai fattori
+	locali effettivi della trasformazione completa. Due procedure fisiche che
+	differiscono per la storia dei rovesciamenti ma producono lo stesso codice
+	effettivo hanno necessariamente lo stesso ordine, gli stessi punti fissi e,
+	più in generale, gli stessi invarianti della permutazione globale.
+
 	\begin{remark}
 		In \(S_b\) le classi di coniugio sono determinate dal tipo di ciclo e sono
 		quindi indicizzate dalle partizioni di \(b\). Le classi di coniugio del
@@ -734,21 +1140,21 @@
 		coniugazione nel gruppo ambiente \(S_{b^m}\) può identificare elementi che
 		restano distinti in \(S_b^m\).
 	\end{remark}
-	
+
 	\section{Discussione conclusiva}
-	
+
 	Il modello posizionale, la descrizione tensoriale e l'azione di gruppo
 	rappresentano tre livelli della stessa struttura. La procedura fisica estrae
-	ciclicamente le cifre dell'indirizzo; il codice locale assegna a ciascun
-	livello una permutazione; il ciclo completo produce una permutazione globale
-	che conserva tutte le partizioni digitali e possiede, nell'ordine fissato,
-	una fattorizzazione di Kronecker unica in fattori di permutazione
-	\(b\times b\). La catena può essere riassunta come
+	ciclicamente le cifre dell'indirizzo; le raccolte e gli eventuali
+	rovesciamenti determinano un codice locale effettivo; il ciclo completo
+	produce una permutazione globale che conserva tutte le partizioni digitali e
+	possiede, nell'ordine fissato, una fattorizzazione di Kronecker unica in
+	fattori di permutazione \(b\times b\). La catena può essere riassunta come
 	\[
 	\begin{aligned}
 		\text{procedura fisica}
 		&\longrightarrow
-		\text{codice locale}
+		\text{codice locale effettivo}
 		\longrightarrow
 		\text{permutazione digitalmente separabile}
 		\\
@@ -756,7 +1162,10 @@
 		\text{fattorizzazione e ricostruzione}.
 	\end{aligned}
 	\]
-	
+	La prima freccia è biunivoca nel sottocaso senza rovesciamenti; se la storia
+	dei rovesciamenti è parte dei dati fisici, ogni codice effettivo possiede
+	invece esattamente \(2^m\) preimmagini.
+
 	La caratterizzazione mediante le partizioni \(\mathcal F_i\) individua la
 	classe globale senza richiamare il gesto concreto del gioco. La formula delle
 	statistiche di fibra aggiunge un secondo livello informativo: entro questa
@@ -764,29 +1173,44 @@
 	La ricostruzione non dipende quindi dalla conoscenza della storia fisica del
 	mazzo, ma dalla permanenza della separabilità digitale nella trasformazione
 	finale.
-	
+
 	Le ipotesi del modello delimitano con precisione il risultato. L'omogeneità
-	\(N=b^m\), la conservazione dell'ordine interno, l'assenza di rovesciamenti e
-	la scelta non adattiva delle raccolte rendono possibile l'azione componente
-	per componente. L'introduzione di controlli supplementari, dipendenze fra i
-	livelli o fattorizzazioni non omogenee conduce a gruppi e dinamiche differenti.
+	\(N=b^m\), la struttura deterministica delle operazioni e la scelta non
+	adattiva delle raccolte rendono possibile una descrizione componente per
+	componente. Il rovesciamento globale non costituisce un'eccezione: la sua
+	matrice \(J_b=R_b^{\otimes m}\) è il sottocaso diagonale dei controlli
+	di rovesciamento e, avendo fattori uguali, commuta con la rotazione ciclica. La famiglia tensoriale
+	estesa libera contemporaneamente le permutazioni locali e i fattori di
+	rovesciamento dei singoli livelli. Questi ultimi non commutano in generale con
+	\(\MSC_m\), ma l'identità di trasporto li ruota e li assorbe con le
+	permutazioni in blocchi effettivi \(A_h\in\mathcal H_{b,m}\). Ogni blocco
+	effettivo possiede \(2^m\) rappresentazioni locali; il ciclo completo satura
+	ancora \(\mathcal H_{b,m}\), e ogni trasformazione finale possiede
+	\(|\mathcal H_{b,m}|^{m-1}\) decomposizioni in blocchi, ciascuna con
+	\(2^{m^2}\) storie dei controlli. Il conteggio \(2^m\) del rovesciamento
+	fisico globale appartiene invece all'intero procedimento e nasce da un
+	meccanismo differente. Ciò che esce dal modello qui caratterizzato sono invece dipendenze
+	adattive fra i livelli o trasformazioni non decomponibili. Fattorizzazioni non
+	omogenee conducono a dinamiche differenti.
 	Il caso rettangolare discusso nell'appendice conserva la permutazione dei
 	fattori tensoriali; per una fattorizzazione \(N=ij\) arbitraria, tuttavia, la
 	chiusura ciclica del modello omogeneo non segue dalla sola rappresentazione a
 	due fattori. Nel gioco delle ventuno carte la determinazione della carta scelta emerge inoltre
 	da una contrazione dello spazio delle possibilità, distinta dalla
 	permutazione fisica del mazzo.
-	
+
 	Il caso \(27=3^3\) non è pertanto speciale soltanto per la sua cardinalità.
-	La compatibilità fra scrittura ternaria, rotazione ciclica dei fattori e
-	azione separata delle raccolte trasforma un procedimento ricreativo in una
-	famiglia rigidamente riconoscibile di permutazioni globali.
-	
+	La compatibilità fra scrittura ternaria, rotazione ciclica dei fattori,
+	azioni locali e assorbimento del rovesciamento trasforma un procedimento
+	ricreativo in una famiglia rigidamente riconoscibile di permutazioni globali.
+	Il Jester moltiplica le realizzazioni fisiche della stessa trasformazione, non
+	le trasformazioni digitalmente separabili disponibili.
+
 	\appendix
-	
-	\section{Il caso rettangolare 
+
+	\section{Il caso rettangolare
 		\texorpdfstring{\(N=i\,j\)}{N=ij} e la dinamica informativa}
-	
+
 	La fattorizzazione \(N=b^m\) utilizza livelli omogenei. Nei procedimenti
 	rettangolari il numero delle carte assume invece la forma
 	\[
@@ -808,7 +1232,7 @@
 	\in
 	\mathbb R^j\otimes\mathbb R^i.
 	\]
-	
+
 	Lo scambio fra quota e colonna è realizzato dalla matrice di commutazione
 	\[
 	K_{j,i}:
@@ -827,7 +1251,7 @@
 	\[
 	K_{j,i}^{-1}=K_{i,j}=K_{j,i}^{\mathsf T}.
 	\]
-	
+
 	Sia \(\tau\in S_i\) la permutazione che assegna alla colonna \(r\) la
 	posizione di blocco \(\tau(r)\), e sia \(P_\tau\) la sua matrice. Conservando
 	l'ordine interno delle colonne, il passaggio fisico è
@@ -849,14 +1273,14 @@
 	\(\mathbb R^{ij}\) mediante le rispettive basi linearizzate, \(M_\tau\) è
 	rappresentato da una matrice di permutazione \(ij\times ij\). La sua
 	invertibilità descrive la reversibilità del passaggio fisico.
-	
+
 	L'operatore \(K_{j,i}\) e la rotazione \(\MSC_m\) esprimono entrambi una
 	permutazione dei fattori. Nel caso \(b^m\), tuttavia, tutti i fattori hanno la
 	stessa dimensione e una rotazione di ordine \(m\) espone successivamente ogni
 	cifra della medesima base. Nel caso rettangolare, quota e colonna hanno in
 	generale dimensioni differenti; lo scambio è invertibile, ma non produce da
 	solo una chiusura digitale analoga.
-	
+
 	Nel gioco delle ventuno carte l'ordine di raccolta è inoltre adattivo. Dopo
 	ogni distribuzione il partecipante indica la colonna contenente la carta
 	scelta e quella colonna viene collocata al centro. Se, più in generale, la
@@ -875,7 +1299,7 @@
 	\]
 	Per \(i\geq2\) la mappa è quindi molti-a-uno. Nel caso degenere \(i=1\),
 	invece, essa è biiettiva.
-	
+
 	Per il gioco classico delle ventuno carte,
 	\[
 	i=3,
@@ -913,39 +1337,39 @@
 	stadio; ciò che si contrae è l'incertezza relativa alla carta scelta. Questa distinzione separa
 	la dinamica del mazzo dalla dinamica informativa e segna il confine naturale
 	della struttura digitalmente separabile sviluppata nel corpo dell'articolo.
-	
+
 	\begin{thebibliography}{9}
-		
+
 		\bibitem{bolker}
 		E.~D. Bolker,
 		\emph{Gergonne's Card Trick, Positional Notation, and Radix Sort},
 		Mathematics Magazine \textbf{83} (2010), no.~1, 46--49.
 		\href{https://doi.org/10.4169/002557010X479983}{doi:10.4169/002557010X479983}.
-		
+
 		\bibitem{champanerkar-jani}
 		J. Champanerkar and M. Jani,
 		\emph{Using a Card Trick to Illustrate Fixed Points and Stability},
 		PRIMUS \textbf{25} (2015), no.~5, 473--483.
 		\href{https://doi.org/10.1080/10511970.2015.1031308}{doi:10.1080/10511970.2015.1031308}.
-		
+
 		\bibitem{diaconis-graham-kantor}
 		P. Diaconis, R.~L. Graham and W.~M. Kantor,
 		\emph{The Mathematics of Perfect Shuffles},
 		Advances in Applied Mathematics \textbf{4} (1983), 175--196.
 		\href{https://doi.org/10.1016/0196-8858(83)90009-X}{doi:10.1016/0196-8858(83)90009-X}.
-		
+
 		\bibitem{henderson-searle}
 		H.~V. Henderson and S.~R. Searle,
 		\emph{The Vec-Permutation Matrix, the Vec Operator and Kronecker Products: A Review},
 		Linear and Multilinear Algebra \textbf{9} (1981), no.~4, 271--288.
 		\href{https://doi.org/10.1080/03081088108817379}{doi:10.1080/03081088108817379}.
-		
+
 		\bibitem{quintero}
 		R. Quintero,
 		\emph{On a Mathematical Model for an Old Card Trick},
 		Recreational Mathematics Magazine \textbf{4} (2017), no.~7, 65--77.
 		\href{https://doi.org/10.1515/rmm-2017-0014}{doi:10.1515/rmm-2017-0014}.
-		
+
 	\end{thebibliography}
-	
+
 \end{document}
