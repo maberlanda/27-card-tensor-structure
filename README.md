@@ -43,38 +43,19 @@ structure. The 27-card trick is used as the principal concrete example.
 
 ## Repository scope
 
-The repository currently contains the mathematical paper and its source.
+This repository is devoted to the mathematical paper and material that
+directly supports it, including its LaTeX source, reproducible calculations
+and supplementary examples.
 
-Planned additions include:
+The companion software is maintained as a separate project.
 
-- programs for permutation and tensor analysis;
-- exhaustive enumerations of procedures and transformations;
-- generated tables and machine-readable datasets;
-- computational checks of the theoretical results;
-- examples reproducing selected calculations;
-- documentation of conventions, file formats and experimental workflows;
-- a project overview connecting the paper, software, data and the more
-  extensive study from which the repository originated.
+## Companion software
 
-The future computational material may include results specific to the
-27-card trick that lie outside the scope of the current general paper.
+The structures discussed in the paper can also be explored computationally with:
 
-## Project structure
+**27-Card Trick Explorer**
 
-The repository is intended to develop along four connected levels:
-
-1. **Mathematical theory**  
-   Positional, tensorial and group-theoretic analysis.
-
-2. **Computational implementation**  
-   Programs generating and analysing permutations, procedures and tables.
-
-3. **Data and reproducibility**  
-   Generated datasets, exhaustive searches and verifiable examples.
-
-4. **Project synthesis**  
-   Documentation explaining how the theoretical and computational parts fit
-   together.
+https://github.com/maberlanda/27-card-trick-explorer
 
 ## Author
 
@@ -88,5 +69,5 @@ The paper and its LaTeX source are currently provided under standard
 copyright protection. No permission for redistribution, modification or
 derivative works is granted unless explicitly stated.
 
-Software and datasets added in the future may be distributed under separate
-licenses, specified in their respective directories.
+Supplementary datasets or other material added to this repository may be
+distributed under separate licenses, specified where applicable.
