@@ -2,23 +2,23 @@
 		Si studiano procedure non adattive su \(N=b^m\) posizioni, con
 		\(b,m\ge2\), costituite da \(m\) stadi di distribuzione ciclica in
 		\(b\) mazzetti e raccolta secondo permutazioni assegnate. La scrittura in
-		base \(b\), con cifre in \(D_b=\{0,\ldots,b-1\}\), identifica le
-		trasformazioni finali con l'azione componente per componente di \(S_b^m\).
-		Tali permutazioni sono caratterizzate dalla preservazione delle partizioni
-		digitali e ammettono una fattorizzazione di Kronecker unica in matrici di
-		permutazione \(b\times b\), nell'ordine fissato.
+		base \(b\), con cifre in \(D_b=\{0,\ldots,b-1\}\), e la rappresentazione
+		mediante matrici di permutazione descrivono lo stadio come rotazione dei
+		fattori tensoriali seguita da un'azione locale. Dopo un ciclo completo,
+		gli esiti costituiscono la classe digitalmente separabile, di cardinalità
+		\((b!)^m\), e ammettono una fattorizzazione di Kronecker unica in matrici
+		di permutazione, fissati l'ordine dei fattori e la loro dimensione
+		\(b\times b\).
 
 		Le somme delle immagini sulle fibre digitali ricostruiscono i fattori locali
-		e forniscono un criterio di riconoscimento: una permutazione arbitraria è
-		digitalmente separabile se e solo se i valori ricostruiti formano una
-		permutazione di \(D_b\) a ogni livello. Il rovesciamento globale non modifica
-		la classe delle trasformazioni ottenibili e introduce una molteplicità
-		uniforme di \(2^m\) procedure ordinarie per trasformazione. Una famiglia
-		tensoriale con controlli locali indipendenti conserva la stessa classe finale
-		e presenta molteplicità anch'esse uniformi, determinate esplicitamente. Il
-		caso \(27=3^3\) illustra la teoria; un'appendice confronta il modello con le
-		distribuzioni rettangolari e con la dinamica informativa del gioco delle
-		ventuno carte.
+		e forniscono un criterio di riconoscimento fra tutte le permutazioni delle
+		\(b^m\) posizioni: dati compatibili con un esito separabile ne determinano
+		l'unicità anche nell'intero \(S_{b^m}\). Il rovesciamento globale e
+		un'estensione algebrica con controlli locali indipendenti conservano la
+		classe finale e introducono molteplicità uniformi, determinate
+		esplicitamente. Il caso \(27=3^3\) illustra la teoria; un'appendice
+		confronta il modello con le distribuzioni rettangolari e con la dinamica
+		informativa del gioco delle ventuno carte.
 	\end{abstract}
 
 	\section{Introduzione}
@@ -35,6 +35,22 @@
 	posizione finale. Il legame con la notazione posizionale e con gli algoritmi
 	di ordinamento per cifre è classico nella letteratura sul trucco di Gergonne
 	\cite{bolker}.
+	Analisi dinamiche di giochi affini e loro generalizzazioni compaiono in
+	Champanerkar e Jani \cite{champanerkar-jani} e Quintero \cite{quintero}.
+
+	Anche gli strumenti algebrici utilizzati qui appartengono a un quadro noto.
+	Per i prodotti di Kronecker e le matrici di commutazione si rinvia a
+	Henderson e Searle \cite{henderson-searle}; D'Angeli e Donno
+	\cite{dangeli-donno} studiano le matrici di shuffle e il riordinamento dei
+	fattori di prodotti di Kronecker. Le azioni coordinate su prodotti cartesiani
+	si collocano nella teoria dei prodotti intrecciati in azione prodotto
+	(\emph{wreath products in product action}) \cite{praeger-schneider}.
+	Nel caso binario, Diaconis, Graham e Kantor
+	\cite[Lemma~4]{diaconis-graham-kantor} descrivono esplicitamente, su
+	\(2^m\) carte, un gruppo generato dai perfect shuffles isomorfo a
+	\((C_2)^m\rtimes C_m\). Quel gruppo comprende anche la rotazione delle
+	coordinate: va distinto dalla sola classe separabile degli esiti finali
+	studiata qui, e le convenzioni operative vanno confrontate separatamente.
 
 	Il modello qui studiato isola una versione non adattiva del procedimento. Si
 	fissano interi
@@ -61,12 +77,16 @@
 	rovesciamenti in un codice locale effettivo, ancora appartenente a
 	\(S_b^m\), che determina la permutazione globale delle \(b^m\) posizioni.
 
-	La domanda centrale non riguarda soltanto il calcolo di questa permutazione.
+	Il problema specifico è comprendere come la distribuzione e la raccolta
+	fisiche si traducano nel formalismo tensoriale. La domanda centrale non
+	riguarda soltanto il calcolo della permutazione finale.
 	Occorre riconoscere, fra tutti gli elementi di \(S_{b^m}\), quelli che possono
 	nascere dal procedimento, individuare la fattorizzazione locale nascosta nella
 	loro azione e stabilire quali informazioni aggregate siano sufficienti a
 	ricostruirla. La scrittura posizionale, il prodotto tensoriale e l'azione del
 	prodotto diretto \(S_b^m\) convergono così nello stesso problema.
+	Le somme di fibra sono considerate come dati aggregati della permutazione,
+	senza presupporne proprietà di minimalità o vantaggi computazionali.
 
 	Il ciclo fisico viene dapprima descritto mediante una rotazione dei fattori
 	tensoriali; dopo \(m\) stadi la rotazione si chiude e la matrice globale si
@@ -84,17 +104,20 @@
 	consentono inoltre di ricostruire tali fattori e forniscono un criterio di
 	riconoscimento che non presuppone la separabilità della permutazione assegnata.
 
-	Il formalismo dei prodotti di Kronecker e delle matrici di commutazione è
-	standard; per le identità fondamentali si rinvia a Henderson e Searle
-	\cite{henderson-searle}. La teoria dei perfect shuffles offre un contesto più
-	ampio per lo studio algebrico delle permutazioni di mazzi
-	\cite{diaconis-graham-kantor}. Analisi dinamiche di giochi di carte affini
-	compaiono, fra gli altri, in Champanerkar e Jani \cite{champanerkar-jani} e
-	Quintero \cite{quintero}; quest'ultimo studia generalizzazioni mediante
-	funzioni discrete e punti fissi. Il presente lavoro ha invece carattere
-	espositivo e concentra l'attenzione sulla classificazione delle permutazioni
-	non adattive, sulla loro struttura tensoriale e sulla ricostruzione mediante
-	statistiche aggregate di fibra.
+	I contributi specifici del lavoro seguono questa progressione. La sezione~2
+	descrive il ciclo non adattivo mediante cifre; la sezione~3 rappresenta lo
+	stadio come rotazione e azione locale e deduce la fattorizzazione dopo un
+	ciclo completo. La sezione~4 caratterizza gli esiti digitalmente separabili;
+	la sezione~5 analizza rovesciamenti, fattori effettivi e molteplicità delle
+	storie operative, distinguendo il modello fisico dall'estensione algebrica.
+	La sezione~6 sviluppa il problema inverso: formula delle somme di fibra,
+	ricostruzione dei fattori e criterio di riconoscimento. In particolare, il
+	Teorema~\ref{thm:criterio-fibra} mostra che le somme non consentono soltanto
+	di ricostruire i fattori entro la classe separabile, ma caratterizzano ogni
+	suo elemento anche fra tutte le permutazioni delle \(b^m\) posizioni.
+	Il collegamento sistematico fra procedimento fisico, classe coordinata e
+	criterio inverso costituisce il contributo del lavoro; gli strumenti
+	tensoriali e di teoria dei gruppi restano quelli standard richiamati sopra.
 
 	\section{Modello posizionale e procedura ordinaria}
 
@@ -301,6 +324,11 @@
 	le trasformazioni locali. Il teorema descrive invece il trasporto di ogni
 	fattore fino al livello sul quale deve agire la raccolta e la successiva
 	chiusura dell'intero ciclo.
+	La rappresentazione dello stadio permette dunque di seguire la catena
+	distribuzione e raccolta, rotazione, azione locale, trasporto e chiusura nel
+	prodotto di Kronecker finale. Il Teorema~3.1 applica al procedimento
+	considerato il meccanismo noto di riordinamento dei fattori mediante matrici
+	di shuffle \cite{dangeli-donno}.
 
 	\section{Permutazioni digitalmente separabili}
 
@@ -481,6 +509,13 @@
 	\[
 	|\mathcal H_{b,m}|=(b!)^m.
 	\]
+	Nella naturale azione su \(\Db^m\), questo è il gruppo base \(S_b^m\)
+	del prodotto intrecciato \(S_b\wr S_m\) in azione prodotto
+	\cite[sezione~1.1]{praeger-schneider}. Si tratta di una struttura standard
+	di azioni coordinate. Dal Teorema~3.1 segue inoltre che, al variare delle
+	\(m\) raccolte locali, il ciclo fisico realizza precisamente tutti gli
+	elementi di questo gruppo base. La classe degli esiti finali non comprende le
+	ulteriori permutazioni dei posti ammesse dal prodotto intrecciato completo.
 
 	Nel caso \(b=m=3\), si ottiene
 	\[
@@ -710,6 +745,10 @@
 		trasformazione finale assegnata, da cui la molteplicità \(2^m\).
 	\end{proof}
 
+	Nella formula seguente \(S_h\) indica la raccolta fisicamente scelta allo
+	stadio \(h\), mentre \(Q_i\) è il fattore locale effettivo al livello
+	\(i\) dell'esito finale, comprensivo dell'effetto dei rovesciamenti.
+
 	\begin{corollary}[Formula esplicita e inversione delle raccolte]
 		\label{cor:formula-inversione-raccolte}
 		Fissata la storia \(\boldsymbol{\varepsilon}\), poniamo, con somme
@@ -762,6 +801,10 @@
 	La famiglia dei controlli può essere ampliata mantenendo invariata
 	l'architettura dello stadio. Usiamo il gruppo
 	\(\mathcal H_{b,m}\cong S_b^m\) introdotto nella sezione precedente.
+	Si tratta di un'estensione tensoriale e algebrica: i controlli indipendenti
+	su tutti i fattori non rappresentano semplicemente le normali raccolte
+	fisiche del gioco. Le formule e i conteggi seguenti riguardano lo spazio
+	dei controlli qui definito, senza presupporne una realizzazione fisica.
 
 	Nella famiglia estesa, allo stadio \(h\),
 	\[
@@ -781,6 +824,9 @@
 	\qquad
 	\varepsilon_{i,h}\in\{0,1\}.
 	\]
+	Nei doppi indici, \(i\) identifica il posto tensoriale e \(h\) lo stadio;
+	\(P_{i,h}\) è una matrice \(b\times b\), mentre il blocco \(P_h\) ha
+	dimensione \(b^m\times b^m\).
 	Il modello ordinario si recupera imponendo
 	\[
 	P_{m-2,h}=\cdots=P_{0,h}=I_b
@@ -1014,15 +1060,23 @@
 	Gli indici incrociati sono l'effetto diretto del trasporto \(\vartheta\).
 
 \begin{remark}[Struttura delle composizioni parziali]
-		Poiché \(\MSC_m\) normalizza \(\mathcal H_{b,m}\) mediante
-		\(\vartheta\) e ha ordine \(m\), il gruppo generato da
-		\(\mathcal H_{b,m}\) e \(\MSC_m\) ha la struttura naturale
+		La relazione \(\MSC_m^m=I\) mostra che l'ordine di \(\MSC_m\) divide
+		\(m\). Per \(0<k<m\), la rotazione \(\MSC_m^k\) sposta il tensore
+		con una sola cifra uguale a \(1\) e tutte le altre uguali a \(0\);
+		quindi non è l'identità e l'ordine è esattamente \(m\).
+		Inoltre \(\vartheta\) ruota i fattori di \(\mathcal H_{b,m}\), che è
+		perciò stabile per coniugazione mediante \(\MSC_m\). Una potenza
+		\(\MSC_m^k\), con \(0<k<m\), fa dipendere una cifra di uscita da un
+		posto diverso dal corrispondente posto d'ingresso: variando quel posto e
+		fissando la cifra d'ingresso si esclude la separabilità digitale. Pertanto
+		\(\mathcal H_{b,m}\cap\langle\MSC_m\rangle=\{I\}\).
+		Stabilità e intersezione banale danno la decomposizione del gruppo generato
+		come prodotto semidiretto interno, e dunque
 		\[
 		\langle\mathcal H_{b,m},\MSC_m\rangle
 		\cong\mathcal H_{b,m}\rtimes C_m,
 		\]
-		dove \(C_m\) agisce ruotando ciclicamente i fattori. Nessuna potenza
-		non banale \(\MSC_m^k\), con \(0<k<m\), è digitalmente separabile. Per
+		dove \(C_m\) agisce ruotando ciclicamente i fattori. Per
 		\(1\le k\le m\),
 		\[
 				T_{k-1}\circ\cdots\circ T_0
@@ -1036,9 +1090,18 @@
 \section{Ricostruzione da statistiche aggregate sulle fibre}
 
 	La caratterizzazione precedente ricostruisce le componenti locali leggendo le
-	cifre delle immagini. Un secondo problema riguarda la quantità di
-	informazione necessaria quando, al posto dell'intera permutazione, siano
-	disponibili dati aggregati sulle fibre digitali.
+	cifre delle immagini. Qui consideriamo invece le somme di fibra come una
+	rappresentazione aggregata della permutazione. La progressione è dalla
+	formula per gli elementi separabili alla ricostruzione entro quella classe,
+	fino al riconoscimento fra tutte le permutazioni di \(X=\{0,\dots,b^m-1\}\).
+
+	La ricostruzione di matrici di permutazione da dati aggregati compare anche
+	nello studio degli X-rays, definiti mediante somme antidiagonali
+	\cite{bebeacua-et-al}. In quel contesto permutazioni diverse possono avere
+	lo stesso X-ray, e l'unicità richiede un'analisi specifica. Le somme sulle
+	fibre digitali utilizzate qui sono statistiche diverse: il criterio seguente
+	riguarda queste partizioni e la classe separabile, senza risolvere un problema
+	generale di tomografia discreta (\emph{discrete tomography}).
 
 	Per una permutazione digitalmente separabile
 	\(\pi=\pi_{\boldsymbol{\rho}}\), si definisce
@@ -1137,6 +1200,12 @@
 		precedenti.
 	\end{remark}
 
+	Il risultato seguente supera la ricostruzione interna del Corollario~6.2:
+	se una permutazione arbitraria di \(X\) produce somme di fibra compatibili
+	con un elemento separabile, deve coincidere con esso. L'unicità vale quindi
+	nell'intero \(S_{b^m}\), senza assumere la separabilità della permutazione
+	da riconoscere.
+
 	\begin{theorem}[Criterio di riconoscimento mediante somme di fibra]\label{thm:criterio-fibra}
 		Sia \(\pi\in S_{b^m}\) una permutazione arbitraria. Per ogni \(i,t\)
 		calcoliamo
@@ -1211,6 +1280,38 @@
 		effettivi e ciascuna decomposizione ammette \(2^{m^2}\) storie complete dei
 		controlli.
 	\end{remark}
+
+	\begin{example}[Un ciclo e la ricostruzione in base due]
+		Per \(b=2\), \(m=3\), scegliamo, senza rovesciamenti,
+		\(S_0=(0\,1)\), \(S_1=I_2\), \(S_2=(0\,1)\). Il ciclo realizza
+		\[
+		\pi\bigl((a_2a_1a_0)_2\bigr)=\val(1-a_2,a_1,1-a_0),
+		\qquad P_\pi=R_2\otimes I_2\otimes R_2.
+		\]
+		La posizione \(2=(010)_2\) segue \(2\mapsto5\mapsto6\mapsto7\).
+		La lista delle immagini, nell'ordine \(x=0,\dots,7\), è
+		\((5,4,7,6,1,0,3,2)\). Le coppie di somme
+		\((\Sigma_{i,0},\Sigma_{i,1})\), per \(i=0,1,2\), sono
+		\((16,12)\), \((10,18)\), \((22,6)\). Con
+		\((C_0,C_1,C_2)=(12,10,6)\) e coefficienti \((4,8,16)\), la
+		formula restituisce \(\rho_0=(0\,1)\), \(\rho_1=\mathrm{id}\),
+		\(\rho_2=(0\,1)\); il Teorema~\ref{thm:criterio-fibra} certifica
+		anche l'unicità di questa permutazione in \(S_8\).
+	\end{example}
+
+	\begin{example}[Rifiuto di una permutazione non separabile]
+		Ancora per \(b=2\), \(m=3\), sia \(\pi=(0\,1)\in S_8\), con
+		le altre posizioni fisse. Sulla fibra \(F_{0,0}=\{0,2,4,6\}\), le
+		immagini \(1\) e \(2\) hanno cifre meno significative diverse, perciò
+		\(\pi\) non è digitalmente separabile. Le somme al livello \(0\) sono
+		\[
+		\Sigma_{0,0}=1+2+4+6=13,\qquad
+		\Sigma_{0,1}=0+3+5+7=15.
+		\]
+		Poiché \(C_0=12\) e \(b^{m-1}=4\), i candidati sono
+		\(\rho_0(0)=1/4\) e \(\rho_0(1)=3/4\). Non formano una
+		permutazione di \(D_2\), e il test rifiuta \(\pi\) già a questo livello.
+	\end{example}
 
 	\section{Il caso delle ventisette carte}
 
@@ -1437,19 +1538,26 @@
 
 	\section{Discussione conclusiva}
 
-	Le procedure considerate conducono, dopo \(m\) stadi, al gruppo
-	\(\mathcal H_{b,m}\cong S_b^m\) delle permutazioni digitalmente separabili.
+	Il lavoro utilizza matrici di permutazione, prodotti di Kronecker, matrici
+	di shuffle e azioni coordinate, strumenti standard, per descrivere il
+	procedimento non adattivo di distribuzione e raccolta su \(b^m\) posizioni.
+	La rappresentazione dello stadio come rotazione e azione locale, seguita dal
+	trasporto di quest'ultima, mostra che dopo \(m\) stadi si realizza
+	precisamente il gruppo base \(\mathcal H_{b,m}\cong S_b^m\).
 	La preservazione delle partizioni digitali ne caratterizza l'azione e
 	determina univocamente i fattori locali. I rovesciamenti globali e i controlli
 	tensoriali estesi modificano le molteplicità delle realizzazioni, mantenendo
 	invariato l'insieme delle trasformazioni finali.
 
-	Le somme di fibra consentono sia la ricostruzione sia il riconoscimento della
-	classe: se i valori ricostruiti definiscono permutazioni locali, la
-	trasformazione assegnata coincide necessariamente con quella separabile
-	corrispondente. Nel modello ordinario con rovesciamento globale e nella
-	famiglia estesa, questa unicità dell'esito non determina una particolare
-	storia dei controlli.
+	Il contributo inverso distingue due livelli. La formula delle somme di
+	fibra ricostruisce i fattori locali entro la classe separabile; il
+	Teorema~\ref{thm:criterio-fibra} stabilisce inoltre che nessun'altra
+	permutazione dell'intero \(S_{b^m}\) può avere le stesse statistiche di un
+	elemento di quella classe. La prova quadratica collega la forma separabile
+	del candidato all'uguaglianza delle somme e al fatto che entrambe le funzioni
+	permutano lo stesso insieme. L'unicità così ottenuta riguarda l'esito e i
+	suoi fattori, mentre le molteplicità delle storie sono quelle già determinate
+	nella sezione~5.
 
 	La chiusura descritta dipende dalle operazioni e dalla struttura digitale
 	fissate. Una rappresentazione rettangolare mediante due fattori non garantisce,
@@ -1457,6 +1565,14 @@
 	carte distingue inoltre la permutazione fisica del mazzo dalla contrazione
 	delle possibilità per la carta scelta. Il caso \(27=3^3\) rende espliciti
 	questi diversi livelli: trasformazione, fattori locali e storia operativa.
+	L'estensione tensoriale con controlli locali indipendenti ha statuto
+	algebrico e non presuppone una realizzazione mediante le normali raccolte.
+
+	La sufficienza delle statistiche non ne dimostra la minimalità né la
+	stabilità rispetto a dati perturbati. Queste questioni, insieme ad altre
+	famiglie di partizioni, a estensioni rettangolari coerenti e ad altre classi
+	riconoscibili da dati aggregati, costituiscono possibili sviluppi; non sono
+	risultati del presente lavoro.
 
 \appendix
 
@@ -1600,22 +1716,41 @@
 		\href{https://doi.org/10.4169/002557010X479983}{doi:10.4169/002557010X479983}.
 
 		\bibitem{champanerkar-jani}
-		J. Champanerkar and M. Jani,
+		J. Champanerkar e M. Jani,
 		\emph{Using a Card Trick to Illustrate Fixed Points and Stability},
 		PRIMUS \textbf{25} (2015), no.~5, 473--483.
 		\href{https://doi.org/10.1080/10511970.2015.1031308}{doi:10.1080/10511970.2015.1031308}.
 
 		\bibitem{diaconis-graham-kantor}
-		P. Diaconis, R.~L. Graham and W.~M. Kantor,
+		P. Diaconis, R.~L. Graham e W.~M. Kantor,
 		\emph{The Mathematics of Perfect Shuffles},
 		Advances in Applied Mathematics \textbf{4} (1983), 175--196.
 		\href{https://doi.org/10.1016/0196-8858(83)90009-X}{doi:10.1016/0196-8858(83)90009-X}.
 
+		\bibitem{dangeli-donno}
+		D. D'Angeli e A. Donno,
+		\emph{Shuffling matrices, Kronecker product and Discrete Fourier Transform},
+		Discrete Applied Mathematics \textbf{233} (2017), 1--18.
+		\href{https://doi.org/10.1016/j.dam.2017.08.018}{doi:10.1016/j.dam.2017.08.018}.
+
 		\bibitem{henderson-searle}
-		H.~V. Henderson and S.~R. Searle,
+		H.~V. Henderson e S.~R. Searle,
 		\emph{The Vec-Permutation Matrix, the Vec Operator and Kronecker Products: A Review},
 		Linear and Multilinear Algebra \textbf{9} (1981), no.~4, 271--288.
 		\href{https://doi.org/10.1080/03081088108817379}{doi:10.1080/03081088108817379}.
+
+		\bibitem{praeger-schneider}
+		C.~E. Praeger e C. Schneider,
+		\emph{Embedding permutation groups into wreath products in product action},
+		Journal of the Australian Mathematical Society \textbf{92} (2012),
+		no.~1, 127--136.
+		\href{https://doi.org/10.1017/S1446788712000110}{doi:10.1017/S1446788712000110}.
+
+		\bibitem{bebeacua-et-al}
+		C. Bebeacua, T. Mansour, A. Postnikov e S. Severini,
+		\emph{On the X-rays of permutations},
+		Electronic Notes in Discrete Mathematics \textbf{20} (2005), 193--203.
+		\href{https://doi.org/10.1016/j.endm.2005.05.063}{doi:10.1016/j.endm.2005.05.063}.
 
 		\bibitem{quintero}
 		R. Quintero,
