@@ -190,9 +190,7 @@
 			+\rho_{k-2}(a_{k-2})b^{m-2}
 			+\cdots
 			+\rho_0(a_0)b^{m-k}
-			\\
-			&+
-			\left\lfloor\frac{x_0}{b^k}\right\rfloor.
+			+\left\lfloor\frac{x_0}{b^k}\right\rfloor
 		\end{aligned}
 		\]
 		In particolare, dopo \(m\) stadi,
@@ -690,8 +688,7 @@
 		T
 		&=
 		T_{m-1}\circ\cdots\circ T_0\\
-		&=
-		(P_{m-1}\circ\MSC_m\circ J_{m-1})
+		&= (P_{m-1}\circ\MSC_m\circ J_{m-1})
 		\circ\cdots\circ
 		(P_0\circ\MSC_m\circ J_0).
 		\end{aligned}
@@ -710,9 +707,7 @@
 		(P_{m-1}\circ J_{m-1})
 		\circ
 		\vartheta(P_{m-2}\circ J_{m-2})
-		\circ\cdots\\
-		&\circ
-		\vartheta^{m-1}(P_0\circ J_0),
+		\circ \cdots \circ\vartheta^{m-1}(P_0\circ J_0)
 		\end{aligned}
 		\]
 		perché \(\MSC_m^m=I\).
@@ -875,9 +870,7 @@
 	\bigl(P_{m-1}\circ\vartheta(J_{m-1})\bigr)
 	\circ
 	\vartheta\!\bigl(P_{m-2}\circ\vartheta(J_{m-2})\bigr)
-	\circ\cdots\\
-	&\qquad\circ
-	\vartheta^{m-1}\!\bigl(P_0\circ\vartheta(J_0)\bigr),
+	\circ \cdots \circ\vartheta^{m-1}\!\bigl(P_0\circ\vartheta(J_0)\bigr),
 	\end{aligned}
 	\]
 	dove la copia finale di \(\MSC_m^m\) è scomparsa perché
@@ -1270,6 +1263,56 @@
 		da cui \(\pi=f\).
 	\end{proof}
 
+\paragraph*{Unicità additiva e rappresentazione per altezze.}
+Il principio di unicità del Teorema~\ref{thm:criterio-fibra} può essere
+collegato al Lemma~2.14 di Kemperman \cite[p.~282]{kemperman}.
+Poniamo \(N=b^m\) e identifichiamo le posizioni con gli indirizzi
+\(a=(a_{m-1},\ldots,a_0)\in\Db^m\). In questa rappresentazione leggiamo
+ogni permutazione \(g\) come funzione degli indirizzi, scrivendo \(g(a)\)
+per il valore \(g(\val(a))\).
+
+Nell'insieme finito
+\[
+\Omega
+=
+\Db^m\times\{0,\ldots,N-2\},
+\]
+consideriamo la rappresentazione per altezze
+\[
+S_g
+=
+\{(a,h)\in\Omega:\ h<g(a)\}.
+\]
+Il marginale di conteggio relativo alla coordinata \(a_i\), nel valore
+\(u\), è \(\Sigma_{i,u}(g)\), ossia la somma dei valori di \(g\) sulla
+fibra \(F_{i,u}\). Il marginale dell'altezza, nel valore \(h\), è
+\(N-1-h\), poiché \(g\) permuta i valori \(0,\ldots,N-1\).
+
+Se
+\[
+f(a)=\sum_{i=0}^{m-1}b^i\rho_i(a_i),
+\]
+allora
+\[
+S_f
+=
+\left\{
+(a,h)\in\Omega:
+\sum_{i=0}^{m-1}b^i\rho_i(a_i)-h-\frac12\ge0
+\right\}.
+\]
+La funzione che definisce la soglia è una somma di funzioni delle singole
+coordinate; nell'ambiente finito con misura di conteggio, \(S_f\) soddisfa
+quindi le ipotesi di additività del lemma.
+
+Il risultato di Kemperman rende \(S_f\) unico fra gli insiemi con gli stessi
+marginali, senza richiedere l'additività del concorrente. Pertanto, se \(g\)
+e \(f\) hanno le stesse somme di fibra, anche i marginali dell'altezza
+coincidono, da cui \(S_g=S_f\) e infine \(g=f\).
+Questa rappresentazione esplicita il rapporto con il principio generale
+di unicità; la dimostrazione quadratica precedente fornisce direttamente
+la conclusione nel modello digitale.
+
 	\begin{remark}[Ricostruzione e perdita della storia dei controlli]
 		Le statistiche di fibra ricostruiscono univocamente il codice locale
 		effettivo e quindi la trasformazione finale, anche quando essa proviene
@@ -1538,41 +1581,102 @@
 
 	\section{Discussione conclusiva}
 
-	Il lavoro utilizza matrici di permutazione, prodotti di Kronecker, matrici
-	di shuffle e azioni coordinate, strumenti standard, per descrivere il
-	procedimento non adattivo di distribuzione e raccolta su \(b^m\) posizioni.
-	La rappresentazione dello stadio come rotazione e azione locale, seguita dal
-	trasporto di quest'ultima, mostra che dopo \(m\) stadi si realizza
-	precisamente il gruppo base \(\mathcal H_{b,m}\cong S_b^m\).
-	La preservazione delle partizioni digitali ne caratterizza l'azione e
-	determina univocamente i fattori locali. I rovesciamenti globali e i controlli
-	tensoriali estesi modificano le molteplicità delle realizzazioni, mantenendo
-	invariato l'insieme delle trasformazioni finali.
+	\subsection{Risultati e portata del modello}
 
-	Il contributo inverso distingue due livelli. La formula delle somme di
-	fibra ricostruisce i fattori locali entro la classe separabile; il
-	Teorema~\ref{thm:criterio-fibra} stabilisce inoltre che nessun'altra
-	permutazione dell'intero \(S_{b^m}\) può avere le stesse statistiche di un
-	elemento di quella classe. La prova quadratica collega la forma separabile
-	del candidato all'uguaglianza delle somme e al fatto che entrambe le funzioni
-	permutano lo stesso insieme. L'unicità così ottenuta riguarda l'esito e i
-	suoi fattori, mentre le molteplicità delle storie sono quelle già determinate
-	nella sezione~5.
+	Il modello non adattivo su \(N=b^m\) posizioni descrive ogni stadio di
+	distribuzione e raccolta come una rotazione delle coordinate digitali
+	seguita da un'azione locale. Dopo \(m\) stadi la rotazione si chiude e gli
+	esiti costituiscono precisamente il gruppo delle trasformazioni
+	digitalmente separabili, isomorfo a \(S_b^m\). La preservazione delle
+	partizioni digitali caratterizza questa classe e determina univocamente
+	le sue componenti locali.
 
-	La chiusura descritta dipende dalle operazioni e dalla struttura digitale
-	fissate. Una rappresentazione rettangolare mediante due fattori non garantisce,
-	da sola, la medesima chiusura ciclica. Il confronto con il gioco delle ventuno
-	carte distingue inoltre la permutazione fisica del mazzo dalla contrazione
-	delle possibilità per la carta scelta. Il caso \(27=3^3\) rende espliciti
-	questi diversi livelli: trasformazione, fattori locali e storia operativa.
-	L'estensione tensoriale con controlli locali indipendenti ha statuto
-	algebrico e non presuppone una realizzazione mediante le normali raccolte.
+	Le somme di fibra sviluppano il problema inverso. Esse consentono di
+	recuperare i fattori di una trasformazione separabile e, attraverso il
+	Teorema~\ref{thm:criterio-fibra}, di riconoscere tale struttura fra tutte le
+	permutazioni delle \(b^m\) posizioni. L'unicità riguarda la trasformazione
+	finale e il suo codice locale effettivo; le diverse storie operative che
+	realizzano lo stesso esito conservano le molteplicità determinate nella
+	sezione~5.
 
-	La sufficienza delle statistiche non ne dimostra la minimalità né la
-	stabilità rispetto a dati perturbati. Queste questioni, insieme ad altre
-	famiglie di partizioni, a estensioni rettangolari coerenti e ad altre classi
-	riconoscibili da dati aggregati, costituiscono possibili sviluppi; non sono
-	risultati del presente lavoro.
+	\subsection{Rapporto con la letteratura e formulazione digitale}
+
+	Gli strumenti della trattazione appartengono a quadri matematici
+	precedenti. Il rapporto fra giochi di Gergonne, notazione posizionale e
+	ordinamento per cifre è discusso da Bolker \cite{bolker}. La teoria dei
+	mescolamenti perfetti è sviluppata da Diaconis, Graham e Kantor
+	\cite{diaconis-graham-kantor}. Matrici di permutazione, prodotti di
+	Kronecker, matrici di commutazione e riordinamenti dei fattori
+	costituiscono il linguaggio algebrico utilizzato qui; per questi ultimi
+	strumenti si rinvia a Henderson e Searle \cite{henderson-searle} e a
+	D'Angeli e Donno \cite{dangeli-donno}. L'azione indipendente sulle
+	coordinate realizza il gruppo di base di un prodotto intrecciato in
+	azione prodotto, nel quadro descritto da Praeger e Schneider
+	\cite{praeger-schneider}.
+
+	Anche la determinazione di insiemi discreti mediante le proiezioni sugli
+	assi appartiene alla letteratura precedente, nella quale si colloca il
+	lavoro di Fishburn, Lagarias, Reeds e Shepp \cite{fishburn-et-al}.
+	Per il principio di unicità pertinente al presente modello, il riferimento
+	utilizzato è il Lemma~2.14 di Kemperman \cite[p.~282]{kemperman}:
+	un insieme additivo è determinato dai propri marginali. L'osservazione
+	successiva al Teorema~\ref{thm:criterio-fibra} esplicita il collegamento,
+	rappresentando i valori della permutazione mediante altezze.
+
+	Nel modello digitale considerato, la separabilità conduce alla formula
+	\[
+	\Sigma_{i,u}
+	=
+	C_i+b^{m-1+i}\rho_i(u),
+	\]
+	con le costanti \(C_i\) determinate nella sezione~6. L'inversione affine
+	\[
+	\rho_i(u)
+	=
+	\frac{\Sigma_{i,u}-C_i}{b^{m-1+i}}
+	\]
+	recupera le componenti locali. Per una permutazione arbitraria, il
+	controllo che ogni lista candidata sia una permutazione di \(\Db\)
+	costituisce il criterio operativo di riconoscimento: quando il controllo
+	è soddisfatto, i candidati ricostruiscono la permutazione assegnata.
+
+	La dimostrazione quadratica del Teorema~\ref{thm:criterio-fibra} rimane
+	autonoma. L'argomento può anche essere letto geometricamente:
+	l'uguaglianza delle somme di fibra rende il residuo \(\pi-f\) ortogonale
+	al candidato separabile \(f\), mentre il comune multinsieme dei valori
+	fissa \(\|\pi\|=\|f\|\). L'identità pitagorica impone allora \(\pi=f\).
+
+	La struttura \(S_b^m\) e il principio generale di unicità hanno dunque
+	precedenti. La presente trattazione ne sviluppa una formulazione digitale
+	esplicita, collegando le somme di fibra, le costanti \(C_i\), il recupero
+	delle componenti locali e il controllo di riconoscimento al procedimento
+	di distribuzione e raccolta studiato. Nelle fonti direttamente consultate
+	non è stata individuata una formulazione operativa completa che riunisca
+	questi elementi. Questa constatazione delimita il confronto bibliografico
+	effettuato; non viene qui avanzata una rivendicazione di novità o di
+	priorità della procedura.
+
+	\subsection{Limiti e sviluppi}
+
+	I risultati dipendono dalle operazioni ammesse e dalla struttura digitale
+	fissata. I rovesciamenti globali e l'estensione tensoriale con controlli
+	locali indipendenti conservano la classe degli esiti finali,
+	modificandone le molteplicità di realizzazione. L'estensione tensoriale
+	ha statuto algebrico e non presuppone che ogni controllo sia realizzabile
+	mediante le normali raccolte.
+
+	La disposizione rettangolare mediante due fattori di dimensioni
+	differenti richiede invece un'analisi distinta. Lo scambio dei fattori
+	descrive un passaggio invertibile, ma da solo non garantisce la chiusura
+	ciclica del modello omogeneo. Nel gioco delle ventuno carte occorre
+	inoltre distinguere la permutazione fisica del mazzo dalla contrazione
+	delle possibilità relative alla carta scelta.
+
+	La sufficienza delle statistiche di fibra non ne dimostra la minimalità
+	né la stabilità rispetto a dati perturbati. Lo studio di questi aspetti,
+	di altre famiglie di partizioni e di ulteriori classi riconoscibili
+	mediante dati aggregati costituisce uno sviluppo successivo della
+	trattazione.
 
 \appendix
 
@@ -1707,7 +1811,7 @@
 	la dinamica del mazzo dalla dinamica informativa e segna il confine naturale
 	della struttura digitalmente separabile sviluppata nel corpo dell'articolo.
 
-	\begin{thebibliography}{9}
+	\begin{thebibliography}{99}
 
 		\bibitem{bolker}
 		E.~D. Bolker,
@@ -1757,5 +1861,18 @@
 		\emph{On a Mathematical Model for an Old Card Trick},
 		Recreational Mathematics Magazine \textbf{4} (2017), no.~7, 65--77.
 		\href{https://doi.org/10.1515/rmm-2017-0014}{doi:10.1515/rmm-2017-0014}.
+
+
+		\bibitem{kemperman}
+		J.~H.~B. Kemperman,
+		\emph{Sets of uniqueness and systems of inequalities having a unique solution},
+		Pacific Journal of Mathematics \textbf{148} (1991), no.~2, 275--301.
+		\href{https://doi.org/10.2140/pjm.1991.148.275}{doi:10.2140/pjm.1991.148.275}.
+
+		\bibitem{fishburn-et-al}
+		P.~C. Fishburn, J.~C. Lagarias, J.~A. Reeds e L.~A. Shepp,
+		\emph{Sets uniquely determined by projections on axes II: Discrete case},
+		Discrete Mathematics \textbf{91} (1991), no.~2, 149--159.
+		\href{https://doi.org/10.1016/0012-365X(91)90106-C}{doi:10.1016/0012-365X(91)90106-C}.
 
 	\end{thebibliography}
